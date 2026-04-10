@@ -1,10 +1,10 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useCallback } from "react";
 import type { User } from "../types/user";
-import LogoIcon from "../components/nav/LogoIcon";
-import LoginButton from "../components/nav/LoginButton";
+import LogoIcon from "../components/nav/NavLogoIcon";
+import LoginButton from "../components/nav/NavLoginButton";
 import NavLink from "../components/nav/NavLink";
-import UserBadge from "../components/nav/UserBadge";
+import UserBadge from "../components/nav/NavUserBadge";
 
 type NavbarProps = {
 	isAuthenticated: boolean;

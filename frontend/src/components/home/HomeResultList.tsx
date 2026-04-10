@@ -1,5 +1,5 @@
 import type { CopyKey, Result } from "../../types/result";
-import ResultRow from "./ResultRow";
+import ResultRow from "./HomeResultRow";
 
 type CopiedState = Record<CopyKey, boolean>;
 

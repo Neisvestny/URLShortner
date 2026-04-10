@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useShortener } from "../../hooks/useShortener";
 import { isValidUrl } from "../../utils/isValidUrl";
 import { copyToClipboard } from "../../utils/copyToClipboard";
-import ResultList from "./ResultList";
-import UrlInput from "./UrlInput";
+import ResultList from "./HomeResultList";
+import UrlInput from "./HomeUrlInput";
 import type { CopyKey } from "../../types/result";
 
 type CopiedState = Record<CopyKey, boolean>;

@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export default function LoginButton() {
 	const [hovered, setHovered] = useState(false);
-	
+
 	return (
 		<button
 			onMouseEnter={() => setHovered(true)}

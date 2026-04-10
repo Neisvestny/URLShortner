@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useParams, Navigate } from "react-router-dom";
-import StatsPage from "./Stats";
+import LinkStatsPage from "./LinkStatsPage";
 
 export default function RedirectHandler() {
 	const { code } = useParams();
@@ -14,7 +14,6 @@ export default function RedirectHandler() {
 		window.location.replace(`https://your-api.com/r/${code}`);
 	}, [code, isValid, isStats]);
 
-
 	if (!code || !isValid) {
 		return <Navigate to="/" replace />;
 	}
@@ -22,7 +21,7 @@ export default function RedirectHandler() {
 	if (isStats) {
 		const cleanCode = code.slice(0, -1);
 		console.log(cleanCode);
-		return <StatsPage />;
+		return <LinkStatsPage code={code} />;
 	}
 
 	return <div>Redirecting...</div>;

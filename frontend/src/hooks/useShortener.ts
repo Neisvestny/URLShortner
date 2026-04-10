@@ -7,7 +7,7 @@ export function useShortener() {
 	const [result, setResult] = useState<Result | null>(null);
 
 	async function shorten(url: string) {
-        // TODO: url передавать в бд
+		// TODO: url передавать в бд
 		setLoading(true);
 		setError("");
 		setResult(null);

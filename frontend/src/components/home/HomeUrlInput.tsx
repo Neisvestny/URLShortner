@@ -1,4 +1,4 @@
-import LoadingDots from "./LoadingDots";
+import LoadingDots from "./HomeLoadingDots";
 
 type Props = {
 	value: string;
@@ -23,9 +23,7 @@ export default function UrlInput({
 				onChange={(e) => {
 					onChange(e.target.value);
 				}}
-				onKeyDown={(e) =>
-					e.key === "Enter" && !loading && onSubmit()
-				}
+				onKeyDown={(e) => e.key === "Enter" && !loading && onSubmit()}
 				placeholder="https://очень-длинная-ссылка.com/которую/нужно/сократить"
 				spellCheck={false}
 				autoComplete="off"
