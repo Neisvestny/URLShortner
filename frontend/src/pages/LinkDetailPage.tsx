@@ -9,7 +9,6 @@ import DonutChart from '../components/linkDetail/DonutChart';
 import MiniBar from '../components/linkDetail/MiniBar';
 import SearchInput from '../components/linkDetail/SearchInput';
 import StatCard from '../components/linkDetail/StatCard';
-import StatsFooter from '../components/linkDetail/StatsFooter';
 import StatsHeader from '../components/linkDetail/StatsHeader';
 import VisitsTable from '../components/linkDetail/VisitsTable';
 import { BROWSER_COLORS, OS_COLORS } from '../constants/colors';
@@ -127,11 +126,7 @@ export default function LinkStatsPage({ code }: Props) {
 				sortAsc={sortAsc}
 				setSortKey={setSortKey}
 				setSortAsc={setSortAsc}
-			/>
-
-			<StatsFooter
-				filteredLength={filtered.length}
-				dataLength={visits.length}
+				totalCount={visits.length}
 			/>
 		</MainLayout>
 	);

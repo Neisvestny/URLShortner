@@ -1,10 +1,10 @@
-import { useCallback, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { authApi } from "../api/authApi";
-import { setUser } from "../features/auth/authSlice";
-import type FormState from "../types/formState";
-import getPasswordStrength from "../utils/getPasswordStrength";
-import { useAppDispatch } from "./storeHooks";
+import { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { authApi } from '../api/authApi';
+import { setUser } from '../features/auth/authSlice';
+import type FormState from '../types/formState';
+import getPasswordStrength from '../utils/getPasswordStrength';
+import { useAppDispatch } from './storeHooks';
 
 export const useAuthSubmit = (
 	form: FormState,
@@ -17,15 +17,15 @@ export const useAuthSubmit = (
 
 	const validateForm = useCallback(() => {
 		if (isRegister && form.password !== form.confirmPassword) {
-			onError("Пароли не совпадают");
+			onError('Пароли не совпадают');
 			return false;
 		}
 
 		if (
 			isRegister &&
-			getPasswordStrength(form.password).label === "Слабый"
+			getPasswordStrength(form.password).label === 'Слабый'
 		) {
-			onError("Пароль слишком слабый");
+			onError('Пароль слишком слабый');
 			return false;
 		}
 
@@ -52,13 +52,13 @@ export const useAuthSubmit = (
 			});
 
 			dispatch(setUser(res.data.user));
-			navigate("/stats");
+			navigate('/stats');
 		} catch (err: any) {
 			const e = err?.response?.data?.error;
 
 			const message = e
-				? `${e.message}${e.details ? `: ${JSON.stringify(e.details)}` : ""}`
-				: err?.message || "Неизвестная ошибка";
+				? `${e.message}${e.details ? `: ${JSON.stringify(e.details)}` : ''}`
+				: err?.message || 'Неизвестная ошибка';
 
 			onError(message);
 		} finally {
