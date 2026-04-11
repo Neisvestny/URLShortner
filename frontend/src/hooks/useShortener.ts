@@ -1,29 +1,28 @@
-import { useState } from "react";
-import type { Result } from "../types/result";
+import { useState } from 'react';
+import { linksApi } from '../api/linksApi';
+import type { ShortenResult } from '../types/shortenResult.ts';
 
 export function useShortener() {
 	const [loading, setLoading] = useState(false);
-	const [error, setError] = useState("");
-	const [result, setResult] = useState<Result | null>(null);
+	const [error, setError] = useState('');
+	const [result, setResult] = useState<ShortenResult | null>(null);
 
 	async function shorten(url: string) {
-		// TODO: url передавать в бд
 		setLoading(true);
-		setError("");
+		setError('');
 		setResult(null);
 
 		try {
-			await new Promise((r) => setTimeout(r, 900));
-
-			const mockCode = Math.random().toString(36).slice(2, 8);
-			const base = `snip.ly/${mockCode}`;
+			const { data } = await linksApi.createLink(url);
+			const base = `${window.location.host}/${data.link.slug}`;
 
 			setResult({
 				shortLink: base,
 				statsLink: `${base}+`,
+				linkId: data.link.id,
 			});
 		} catch {
-			setError("Ошибка сервера. Попробуй ещё раз.");
+			setError('Ошибка сервера. Попробуй ещё раз.');
 		} finally {
 			setLoading(false);
 		}

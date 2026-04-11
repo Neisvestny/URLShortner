@@ -1,5 +1,10 @@
-import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { User } from "../../types/user";
+import {
+	createAsyncThunk,
+	createSlice,
+	type PayloadAction,
+} from '@reduxjs/toolkit';
+import { authApi } from '../../api/authApi';
+import type { User } from '../../types/user';
 
 type AuthState = {
 	user: User | null;
@@ -7,53 +12,43 @@ type AuthState = {
 	isInitialized: boolean;
 };
 
-const getInitialState = (): AuthState => {
-	try {
-		const stored = localStorage.getItem("user");
-		if (!stored) {
-			return {
-				user: null,
-				isAuthenticated: false,
-				isInitialized: true,
-			};
-		}
-
-		const user = JSON.parse(stored);
-
-		return {
-			user,
-			isAuthenticated: true,
-			isInitialized: true,
-		};
-	} catch {
-		return {
-			user: null,
-			isAuthenticated: false,
-			isInitialized: true,
-		};
-	}
+const initialState: AuthState = {
+	user: null,
+	isAuthenticated: false,
+	isInitialized: false,
 };
 
-const initialState: AuthState = getInitialState();
+export const initAuth = createAsyncThunk(
+	'auth/init',
+	async (_, { dispatch }) => {
+		try {
+			const { data } = await authApi.me();
+			dispatch(authSlice.actions.setUser(data.user));
+		} catch {
+			dispatch(authSlice.actions.setInitialized());
+		}
+	},
+);
 
 const authSlice = createSlice({
-	name: "auth",
+	name: 'auth',
 	initialState,
 	reducers: {
-		login(state, action: PayloadAction<User>) {
+		setUser(state, action: PayloadAction<User>) {
 			state.user = action.payload;
 			state.isAuthenticated = true;
-
-			localStorage.setItem("user", JSON.stringify(action.payload));
+			state.isInitialized = true;
 		},
-		logout(state) {
+		clearUser(state) {
 			state.user = null;
 			state.isAuthenticated = false;
-
-			localStorage.removeItem("user");
+			state.isInitialized = true;
+		},
+		setInitialized(state) {
+			state.isInitialized = true;
 		},
 	},
 });
 
-export const { login, logout } = authSlice.actions;
+export const { setUser, clearUser } = authSlice.actions;
 export default authSlice.reducer;

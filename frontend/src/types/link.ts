@@ -1,8 +1,8 @@
-export type Link = {
+export interface Link {
 	id: string;
 	slug: string;
-	originalUrl: string;
+	original_url: string;
+	created_at: string;
 	visits: number;
-	createdAt: string;
-	lastVisit: string;
-};
+	last_visit: string | null;
+}

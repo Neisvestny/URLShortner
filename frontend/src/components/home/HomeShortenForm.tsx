@@ -1,15 +1,15 @@
-import { useState } from "react";
-import { useShortener } from "../../hooks/useShortener";
-import { isValidUrl } from "../../utils/isValidUrl";
-import { copyToClipboard } from "../../utils/copyToClipboard";
-import ResultList from "./HomeResultList";
-import UrlInput from "./HomeUrlInput";
-import type { CopyKey } from "../../types/result";
+import { useState } from 'react';
+import { useShortener } from '../../hooks/useShortener';
+import type { CopyKey } from '../../types/shortenResult.ts';
+import { copyToClipboard } from '../../utils/copyToClipboard';
+import { isValidUrl } from '../../utils/isValidUrl';
+import ResultList from './HomeResultList';
+import UrlInput from './HomeUrlInput';
 
 type CopiedState = Record<CopyKey, boolean>;
 
 export default function ShortenForm() {
-	const [url, setUrl] = useState("");
+	const [url, setUrl] = useState('');
 	const [copied, setCopied] = useState<CopiedState>({
 		short: false,
 		stats: false,
@@ -20,7 +20,7 @@ export default function ShortenForm() {
 		const trimmed = url.trim();
 
 		if (!isValidUrl(trimmed)) {
-			setError("Введите корректный URL");
+			setError('Введите корректный URL');
 			return;
 		}
 
@@ -39,13 +39,14 @@ export default function ShortenForm() {
 	return (
 		<div
 			style={{
-				width: "100%",
-				maxWidth: 580,
-				background: "#111",
-				border: `1px solid ${result ? "rgba(255,255,255,0.15)" : "rgba(255,255,255,0.08)"}`,
+				width: '100%',
+				maxWidth: 800,
+				background: '#111',
+				border: `1px solid ${result ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.08)'}`,
 				borderRadius: 16,
 				padding: 24,
-				transition: "border-color 0.2s",
+				transition: 'border-color 0.2s',
+				margin: '0 auto',
 			}}
 		>
 			{/* Input row */}
@@ -55,7 +56,7 @@ export default function ShortenForm() {
 				loading={loading}
 				onChange={(v) => {
 					setUrl(v);
-					setError("");
+					setError('');
 				}}
 				onSubmit={handleShorten}
 			/>
@@ -65,8 +66,8 @@ export default function ShortenForm() {
 				<p
 					style={{
 						fontSize: 12,
-						color: "#ff4444",
-						margin: "0",
+						color: '#ff4444',
+						margin: '0',
 					}}
 				>
 					{error}

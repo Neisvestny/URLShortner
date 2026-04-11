@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useState, type ReactNode } from 'react';
 
 type NavLinkProps = {
 	children: ReactNode;
@@ -14,14 +14,14 @@ export default function NavLink({ children, onClick }: NavLinkProps) {
 			onMouseLeave={() => setHovered(false)}
 			style={{
 				fontSize: 13,
-				color: hovered ? "#ededed" : "#888",
-				padding: "6px 12px",
+				color: hovered ? '#ededed' : '#888',
+				padding: '6px 12px',
 				borderRadius: 7,
-				cursor: "pointer",
-				border: "none",
-				background: hovered ? "rgba(237,237,237,0.06)" : "transparent",
-				transition: "all 0.15s",
-				fontFamily: "inherit",
+				cursor: 'pointer',
+				border: 'none',
+				background: hovered ? 'rgba(237,237,237,0.06)' : 'transparent',
+				transition: 'all 0.15s',
+				fontFamily: 'inherit',
 			}}
 		>
 			{children}

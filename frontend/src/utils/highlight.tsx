@@ -1,7 +1,7 @@
 export default function highlight(text: string, query: string) {
 	if (!query.trim()) return <>{text}</>;
 
-	const regex = new RegExp(`(${query})`, "ig");
+	const regex = new RegExp(`(${query})`, 'ig');
 	const parts = text.split(regex);
 
 	return (
@@ -11,10 +11,10 @@ export default function highlight(text: string, query: string) {
 					<mark
 						key={i}
 						style={{
-							background: "rgba(180,140,255,0.25)",
-							color: "#d4b8ff",
+							background: 'rgba(180,140,255,0.25)',
+							color: '#d4b8ff',
 							borderRadius: 3,
-							padding: "0 1px",
+							padding: '0 1px',
 						}}
 					>
 						{part}

@@ -4,11 +4,11 @@ export default function LogoIcon() {
 			style={{
 				width: 22,
 				height: 22,
-				background: "#ededed",
+				background: '#ededed',
 				borderRadius: 5,
-				display: "flex",
-				alignItems: "center",
-				justifyContent: "center",
+				display: 'flex',
+				alignItems: 'center',
+				justifyContent: 'center',
 				flexShrink: 0,
 			}}
 		>
