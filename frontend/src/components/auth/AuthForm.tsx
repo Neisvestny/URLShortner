@@ -1,5 +1,7 @@
+import { Eye, EyeOff } from 'lucide-react';
 import { useState, type ChangeEvent } from 'react';
 import type FormState from '../../types/formState';
+import getPasswordStrength from '../../utils/getPasswordStrength';
 
 const inputStyle: React.CSSProperties = {
 	width: '100%',
@@ -32,7 +34,11 @@ type Props = {
 };
 
 export default function AuthForm({ form, isRegister, onChange }: Props) {
+	const [showPassword, setShowPassword] = useState(false);
+	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 	const [focusedField, setFocusedField] = useState<string | null>(null);
+
+	const passwordStrength = getPasswordStrength(form.password);
 
 	return (
 		<div
@@ -82,40 +88,128 @@ export default function AuthForm({ form, isRegister, onChange }: Props) {
 
 			<div>
 				<label style={labelStyle}>Пароль</label>
-				<input
-					type="password"
-					placeholder="••••••••"
-					value={form.password}
-					onChange={onChange('password')}
-					onFocus={() => setFocusedField('password')}
-					onBlur={() => setFocusedField(null)}
-					style={{
-						...inputStyle,
-						borderColor:
-							focusedField === 'password' ? '#333' : '#1f1f1f',
-					}}
-				/>
+
+				<div style={{ position: 'relative' }}>
+					<input
+						type={showPassword ? 'text' : 'password'}
+						placeholder="••••••••"
+						value={form.password}
+						onChange={onChange('password')}
+						style={{
+							...inputStyle,
+							paddingRight: 40,
+						}}
+					/>
+
+					<button
+						type="button"
+						onClick={() => setShowPassword((prev) => !prev)}
+						style={{
+							position: 'absolute',
+							right: 10,
+							top: '50%',
+							transform: 'translateY(-50%)',
+							background: 'none',
+							border: 'none',
+							cursor: 'pointer',
+						}}
+					>
+						{showPassword ? (
+							<EyeOff size={16} />
+						) : (
+							<Eye size={16} />
+						)}
+					</button>
+				</div>
 			</div>
 
 			{isRegister && (
-				<div>
-					<label style={labelStyle}>Повторите пароль</label>
-					<input
-						type="password"
-						placeholder="••••••••"
-						value={form.confirmPassword}
-						onChange={onChange('confirmPassword')}
-						onFocus={() => setFocusedField('confirmPassword')}
-						onBlur={() => setFocusedField(null)}
-						style={{
-							...inputStyle,
-							borderColor:
-								focusedField === 'confirmPassword'
-									? '#333'
-									: '#1f1f1f',
-						}}
-					/>
-				</div>
+				<>
+					<div>
+						<label style={labelStyle}>Повторите пароль</label>
+
+						<div style={{ position: 'relative' }}>
+							<input
+								type={showConfirmPassword ? 'text' : 'password'}
+								placeholder="••••••••"
+								value={form.confirmPassword}
+								onChange={onChange('confirmPassword')}
+								onFocus={() =>
+									setFocusedField('confirmPassword')
+								}
+								onBlur={() => setFocusedField(null)}
+								style={{
+									...inputStyle,
+									paddingRight: 40,
+									borderColor:
+										focusedField === 'confirmPassword'
+											? '#333'
+											: '#1f1f1f',
+								}}
+							/>
+							<button
+								type="button"
+								onClick={() =>
+									setShowConfirmPassword((prev) => !prev)
+								}
+								style={{
+									position: 'absolute',
+									right: 10,
+									top: '50%',
+									transform: 'translateY(-50%)',
+									background: 'none',
+									border: 'none',
+									cursor: 'pointer',
+								}}
+							>
+								{showConfirmPassword ? (
+									<EyeOff size={16} />
+								) : (
+									<Eye size={16} />
+								)}
+							</button>
+						</div>
+					</div>
+
+					{form.password && (
+						<div style={{ marginTop: 6 }}>
+							<div
+								style={{
+									height: 4,
+									borderRadius: 4,
+									background: '#222',
+									overflow: 'hidden',
+								}}
+							>
+								<div
+									style={{
+										width: `${
+											passwordStrength.label === 'Слабый'
+												? 33
+												: passwordStrength.label ===
+													  'Средний'
+													? 66
+													: 100
+										}%`,
+										height: '100%',
+										background: passwordStrength.color,
+										transition: '0.2s',
+									}}
+								/>
+							</div>
+
+							<div
+								style={{
+									fontSize: 12,
+									color: passwordStrength.color,
+									marginTop: 4,
+								}}
+							>
+								{passwordStrength.label}
+							</div>
+						</div>
+					)}
+				</>
 			)}
 		</div>
 	);
