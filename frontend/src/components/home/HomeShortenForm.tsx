@@ -41,11 +41,11 @@ export default function ShortenForm() {
 			style={{
 				width: '100%',
 				maxWidth: 800,
-				background: '#111',
-				border: `1px solid ${result ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.08)'}`,
+				background: 'var(--surface)',
+				border: `0.5px solid ${result ? 'var(--border-hover)' : 'var(--border)'}`,
 				borderRadius: 16,
 				padding: 24,
-				transition: 'border-color 0.2s',
+				transition: 'border-color 0.2s, background 0.2s',
 				margin: '0 auto',
 			}}
 		>
@@ -66,7 +66,7 @@ export default function ShortenForm() {
 				<p
 					style={{
 						fontSize: 12,
-						color: '#ff4444',
+						color: 'var(--color-text-danger, #ff4444)',
 						margin: '0',
 					}}
 				>

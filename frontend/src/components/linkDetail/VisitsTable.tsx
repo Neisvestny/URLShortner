@@ -47,7 +47,7 @@ export default function VisitsTable({
 			<div
 				style={{
 					borderRadius: 14,
-					border: '1px solid rgba(255,255,255,0.07)',
+					border: '0.5px solid var(--border)',
 					overflow: 'hidden',
 				}}
 			>
@@ -74,7 +74,7 @@ export default function VisitsTable({
 										style={{
 											padding: '48px 24px',
 											textAlign: 'center',
-											color: '#444',
+											color: 'var(--muted)',
 											fontSize: 14,
 										}}
 									>

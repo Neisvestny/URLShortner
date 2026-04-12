@@ -25,7 +25,7 @@ export default function StatsBar() {
 				gap: 48,
 				marginTop: 64,
 				paddingTop: 48,
-				borderTop: '1px solid rgba(255,255,255,0.08)',
+				borderTop: '0.5px solid var(--border)',
 			}}
 		>
 			{items.map(({ num, desc }) => (
@@ -35,11 +35,18 @@ export default function StatsBar() {
 							fontSize: 28,
 							fontWeight: 500,
 							letterSpacing: '-1px',
+							color: 'var(--fg)',
 						}}
 					>
 						{num}
 					</div>
-					<div style={{ fontSize: 12, color: '#888', marginTop: 4 }}>
+					<div
+						style={{
+							fontSize: 12,
+							color: 'var(--muted)',
+							marginTop: 4,
+						}}
+					>
 						{desc}
 					</div>
 				</div>

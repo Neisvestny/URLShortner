@@ -11,16 +11,18 @@ export default function AuthSeparator() {
 			<div
 				style={{
 					flex: 1,
-					height: 1,
-					background: '#1f1f1f',
+					height: '0.5px',
+					background: 'var(--border)',
 				}}
 			/>
-			<span style={{ fontSize: 12, color: '#444' }}>или</span>
+			<span style={{ fontSize: 12, color: 'var(--muted)', opacity: 0.6 }}>
+				или
+			</span>
 			<div
 				style={{
 					flex: 1,
-					height: 1,
-					background: '#1f1f1f',
+					height: '0.5px',
+					background: 'var(--border)',
 				}}
 			/>
 		</div>

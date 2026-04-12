@@ -25,7 +25,7 @@ export default function DonutChart({
 					cy={cy}
 					r={r}
 					fill="none"
-					stroke="rgba(255,255,255,0.06)"
+					stroke="var(--border)"
 					strokeWidth={10}
 				/>
 				{data.map((d, i) => {
@@ -62,7 +62,7 @@ export default function DonutChart({
 					y={cy + 1}
 					textAnchor="middle"
 					dominantBaseline="middle"
-					fill="#ededed"
+					fill="var(--fg)"
 					fontSize={13}
 					fontWeight={500}
 				>
@@ -89,10 +89,22 @@ export default function DonutChart({
 								flexShrink: 0,
 							}}
 						/>
-						<span style={{ fontSize: 12, color: '#888', flex: 1 }}>
+						<span
+							style={{
+								fontSize: 12,
+								color: 'var(--muted)',
+								flex: 1,
+							}}
+						>
 							{d.key}
 						</span>
-						<span style={{ fontSize: 12, color: '#555' }}>
+						<span
+							style={{
+								fontSize: 12,
+								color: 'var(--muted)',
+								opacity: 0.6,
+							}}
+						>
 							{Math.round((d.n / total) * 100)}%
 						</span>
 					</div>

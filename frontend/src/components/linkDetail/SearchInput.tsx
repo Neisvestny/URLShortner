@@ -11,7 +11,7 @@ export default function SearchInput({ value, onChange }: Props) {
 				height="15"
 				viewBox="0 0 24 24"
 				fill="none"
-				stroke="#555"
+				stroke="var(--muted)"
 				strokeWidth="2"
 				strokeLinecap="round"
 				strokeLinejoin="round"
@@ -36,9 +36,9 @@ export default function SearchInput({ value, onChange }: Props) {
 					boxSizing: 'border-box',
 					padding: '11px 16px 11px 40px',
 					borderRadius: 11,
-					background: 'rgba(255,255,255,0.04)',
-					border: '1px solid rgba(255,255,255,0.09)',
-					color: '#ededed',
+					background: 'var(--surface)',
+					border: '0.5px solid var(--border)',
+					color: 'var(--fg)',
 					fontSize: 14,
 					outline: 'none',
 					transition: 'border-color 0.15s',
@@ -49,8 +49,7 @@ export default function SearchInput({ value, onChange }: Props) {
 						'rgba(180,140,255,0.4)')
 				}
 				onBlur={(e) =>
-					(e.currentTarget.style.borderColor =
-						'rgba(255,255,255,0.09)')
+					(e.currentTarget.style.borderColor = 'var(--border)')
 				}
 			/>
 			{value && (
@@ -63,7 +62,7 @@ export default function SearchInput({ value, onChange }: Props) {
 						transform: 'translateY(-50%)',
 						background: 'none',
 						border: 'none',
-						color: '#555',
+						color: 'var(--muted)',
 						cursor: 'pointer',
 						padding: 4,
 						display: 'flex',

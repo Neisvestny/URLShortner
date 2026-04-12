@@ -17,7 +17,7 @@ export default function ResultList({
 	return (
 		<div
 			style={{
-				borderTop: '1px solid rgba(255,255,255,0.08)',
+				borderTop: '0.5px solid var(--border)',
 				paddingTop: 16,
 				marginTop: 4,
 				display: 'flex',

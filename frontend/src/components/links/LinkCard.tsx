@@ -1,3 +1,5 @@
+import { Check, Copy } from 'lucide-react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { Link } from '../../types/link';
 import highlight from '../../utils/highlight';
@@ -13,6 +15,7 @@ type Props = {
 
 export default function StatsCard({ link, index, query, maxVisits }: Props) {
 	const navigate = useNavigate();
+	const [copied, setCopied] = useState(false);
 
 	return (
 		<div
@@ -20,22 +23,22 @@ export default function StatsCard({ link, index, query, maxVisits }: Props) {
 			style={{
 				padding: '20px 24px',
 				borderRadius: 14,
-				background: 'rgba(255,255,255,0.03)',
-				border: '1px solid rgba(255,255,255,0.07)',
+				background: 'var(--surface)',
+				border: '0.5px solid var(--border)',
 				transition: 'border-color 0.15s, background 0.15s',
 				cursor: 'pointer',
 			}}
 			onMouseEnter={(e) => {
 				(e.currentTarget as HTMLDivElement).style.background =
-					'rgba(255,255,255,0.055)';
+					'var(--surface-hover)';
 				(e.currentTarget as HTMLDivElement).style.borderColor =
-					'rgba(255,255,255,0.13)';
+					'var(--border-hover)';
 			}}
 			onMouseLeave={(e) => {
 				(e.currentTarget as HTMLDivElement).style.background =
-					'rgba(255,255,255,0.03)';
+					'var(--surface)';
 				(e.currentTarget as HTMLDivElement).style.borderColor =
-					'rgba(255,255,255,0.07)';
+					'var(--border)';
 			}}
 		>
 			<div
@@ -59,13 +62,13 @@ export default function StatsCard({ link, index, query, maxVisits }: Props) {
 						<span
 							style={{
 								fontSize: 11,
-								fontWeight: 600,
-								color: index === 0 ? '#b48cff' : '#555',
+								fontWeight: 500,
+								color: index === 0 ? '#b48cff' : 'var(--muted)',
 								background:
 									index === 0
 										? 'rgba(180,140,255,0.1)'
-										: 'rgba(255,255,255,0.04)',
-								border: `1px solid ${index === 0 ? 'rgba(180,140,255,0.25)' : 'rgba(255,255,255,0.07)'}`,
+										: 'var(--bg)',
+								border: `0.5px solid ${index === 0 ? 'rgba(180,140,255,0.25)' : 'var(--border)'}`,
 								borderRadius: 6,
 								padding: '2px 7px',
 								letterSpacing: '0.03em',
@@ -77,7 +80,7 @@ export default function StatsCard({ link, index, query, maxVisits }: Props) {
 							style={{
 								fontSize: 15,
 								fontWeight: 500,
-								color: '#ededed',
+								color: 'var(--fg)',
 								letterSpacing: '-0.3px',
 							}}
 						>
@@ -89,7 +92,7 @@ export default function StatsCard({ link, index, query, maxVisits }: Props) {
 						style={{
 							margin: 0,
 							fontSize: 13,
-							color: '#555',
+							color: 'var(--muted)',
 							overflow: 'hidden',
 							textOverflow: 'ellipsis',
 							whiteSpace: 'nowrap',
@@ -119,6 +122,7 @@ export default function StatsCard({ link, index, query, maxVisits }: Props) {
 								fontWeight: 500,
 								letterSpacing: '-0.8px',
 								lineHeight: 1,
+								color: 'var(--fg)',
 							}}
 						>
 							{link.visits.toLocaleString('ru')}
@@ -127,7 +131,7 @@ export default function StatsCard({ link, index, query, maxVisits }: Props) {
 							style={{
 								margin: '4px 0 0',
 								fontSize: 11,
-								color: '#555',
+								color: 'var(--muted)',
 								textTransform: 'uppercase',
 								letterSpacing: '0.05em',
 							}}
@@ -141,7 +145,7 @@ export default function StatsCard({ link, index, query, maxVisits }: Props) {
 							style={{
 								margin: 0,
 								fontSize: 13,
-								color: '#666',
+								color: 'var(--muted)',
 								lineHeight: 1,
 							}}
 						>
@@ -160,9 +164,10 @@ export default function StatsCard({ link, index, query, maxVisits }: Props) {
 							style={{
 								margin: '4px 0 0',
 								fontSize: 11,
-								color: '#444',
+								color: 'var(--muted)',
 								textTransform: 'uppercase',
 								letterSpacing: '0.05em',
+								opacity: 0.6,
 							}}
 						>
 							последний
@@ -172,18 +177,22 @@ export default function StatsCard({ link, index, query, maxVisits }: Props) {
 					<button
 						onClick={(e) => {
 							e.stopPropagation();
+
 							navigator.clipboard.writeText(
-								`https://shr.t/${link.slug}`,
+								`${window.location.origin}/${link.slug}`,
 							);
+							setCopied(true);
+
+							setTimeout(() => setCopied(false), 1500);
 						}}
 						title="Скопировать ссылку"
 						style={{
 							width: 34,
 							height: 34,
 							borderRadius: 8,
-							border: '1px solid rgba(255,255,255,0.09)',
-							background: 'rgba(255,255,255,0.04)',
-							color: '#666',
+							border: '0.5px solid var(--border)',
+							background: 'var(--bg)',
+							color: 'var(--muted)',
 							cursor: 'pointer',
 							display: 'flex',
 							alignItems: 'center',
@@ -193,39 +202,20 @@ export default function StatsCard({ link, index, query, maxVisits }: Props) {
 						}}
 						onMouseEnter={(e) => {
 							(e.currentTarget as HTMLButtonElement).style.color =
-								'#ededed';
+								'var(--fg)';
 							(
 								e.currentTarget as HTMLButtonElement
-							).style.borderColor = 'rgba(255,255,255,0.2)';
+							).style.borderColor = 'var(--border-hover)';
 						}}
 						onMouseLeave={(e) => {
 							(e.currentTarget as HTMLButtonElement).style.color =
-								'#666';
+								'var(--muted)';
 							(
 								e.currentTarget as HTMLButtonElement
-							).style.borderColor = 'rgba(255,255,255,0.09)';
+							).style.borderColor = 'var(--border)';
 						}}
 					>
-						<svg
-							width="14"
-							height="14"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							strokeWidth="2"
-							strokeLinecap="round"
-							strokeLinejoin="round"
-						>
-							<rect
-								x="9"
-								y="9"
-								width="13"
-								height="13"
-								rx="2"
-								ry="2"
-							/>
-							<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-						</svg>
+						{copied ? <Check size={14} /> : <Copy size={14} />}
 					</button>
 				</div>
 			</div>

@@ -10,8 +10,8 @@ export default function AuthModeSwitch({ mode, onChange }: Props) {
 		<div
 			style={{
 				display: 'flex',
-				background: '#111',
-				border: '1px solid #1f1f1f',
+				background: 'var(--bg)',
+				border: '0.5px solid var(--border)',
 				borderRadius: 10,
 				padding: 4,
 				marginBottom: 28,
@@ -32,9 +32,13 @@ export default function AuthModeSwitch({ mode, onChange }: Props) {
 						fontWeight: 500,
 						fontFamily: 'inherit',
 						transition: 'all 0.15s',
-						background: mode === m ? '#1a1a1a' : 'transparent',
-						color: mode === m ? '#ededed' : '#555',
-						boxShadow: mode === m ? '0 0 0 1px #2a2a2a' : 'none',
+						background:
+							mode === m ? 'var(--surface)' : 'transparent',
+						color: mode === m ? 'var(--fg)' : 'var(--muted)',
+						boxShadow:
+							mode === m
+								? '0 0 0 0.5px var(--border-hover)'
+								: 'none',
 					}}
 				>
 					{m === 'login' ? 'Вход' : 'Регистрация'}

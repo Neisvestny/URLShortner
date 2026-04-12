@@ -20,33 +20,43 @@ export default function UrlInput({
 			<input
 				type="url"
 				value={value}
-				onChange={(e) => {
-					onChange(e.target.value);
-				}}
+				onChange={(e) => onChange(e.target.value)}
 				onKeyDown={(e) => e.key === 'Enter' && !loading && onSubmit()}
 				placeholder="https://очень-длинная-ссылка.com/которую/нужно/сократить"
 				spellCheck={false}
 				autoComplete="off"
 				style={{
 					flex: 1,
-					background: '#1a1a1a',
-					border: `1px solid ${error ? '#ff4444' : 'rgba(255,255,255,0.08)'}`,
+					background: 'var(--surface)',
+					border: `0.5px solid ${error ? 'var(--color-border-danger, #ff4444)' : 'var(--border)'}`,
 					borderRadius: 10,
 					padding: '11px 14px',
 					fontSize: 14,
-					color: '#ededed',
+					color: 'var(--fg)',
 					outline: 'none',
 					fontFamily: 'inherit',
 					transition: 'border-color 0.15s',
 					minWidth: 0,
+				}}
+				onFocus={(e) => {
+					e.currentTarget.style.borderColor = error
+						? 'var(--color-border-danger, #ff4444)'
+						: 'var(--border-hover)';
+				}}
+				onBlur={(e) => {
+					e.currentTarget.style.borderColor = error
+						? 'var(--color-border-danger, #ff4444)'
+						: 'var(--border)';
 				}}
 			/>
 			<button
 				onClick={onSubmit}
 				disabled={loading}
 				style={{
-					background: loading ? 'rgba(237,237,237,0.6)' : '#ededed',
-					color: '#0a0a0a',
+					background: loading
+						? 'var(--fg-muted, var(--muted))'
+						: 'var(--fg)',
+					color: 'var(--bg)',
 					border: 'none',
 					borderRadius: 10,
 					padding: '11px 20px',
@@ -57,6 +67,13 @@ export default function UrlInput({
 					whiteSpace: 'nowrap',
 					minWidth: 110,
 					fontFamily: 'inherit',
+					opacity: loading ? 0.6 : 1,
+				}}
+				onMouseEnter={(e) => {
+					if (!loading) e.currentTarget.style.opacity = '0.88';
+				}}
+				onMouseLeave={(e) => {
+					if (!loading) e.currentTarget.style.opacity = '1';
 				}}
 			>
 				{loading ? <LoadingDots /> : 'Сократить'}

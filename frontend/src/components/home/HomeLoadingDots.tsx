@@ -2,7 +2,7 @@ export default function LoadingDots() {
 	const dotStyle = (delay: number) => ({
 		width: 4,
 		height: 4,
-		background: '#0a0a0a',
+		background: 'var(--logo-fg)',
 		borderRadius: '50%',
 		display: 'inline-block',
 		animation: `bounce 0.9s ${delay}s infinite`,

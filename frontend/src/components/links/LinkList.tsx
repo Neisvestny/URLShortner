@@ -16,9 +16,9 @@ export default function StatsList({ links, query, maxVisits }: Props) {
 				style={{
 					textAlign: 'center',
 					padding: '60px 24px',
-					color: '#444',
+					color: 'var(--muted)',
 					fontSize: 14,
-					border: '1px dashed rgba(255,255,255,0.07)',
+					border: '0.5px dashed var(--border-hover)',
 					borderRadius: 14,
 				}}
 			>

@@ -11,7 +11,7 @@ export default function VisitBar({
 			style={{
 				height: 3,
 				borderRadius: 99,
-				background: 'rgba(255,255,255,0.07)',
+				background: 'var(--border)',
 				overflow: 'hidden',
 				marginTop: 12,
 			}}

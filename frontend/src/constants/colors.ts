@@ -1,15 +1,15 @@
 export const BROWSER_COLORS: Record<string, string> = {
-	Chrome: '#7c7cff',
-	Firefox: '#ff9f55',
-	Safari: '#55d4ff',
-	Edge: '#55ffb8',
-	Opera: '#ff5577',
+	Chrome: '#5b5bdd',
+	Firefox: '#d97c3a',
+	Safari: '#3aaad4',
+	Edge: '#3abd8a',
+	Opera: '#d43f5f',
 };
 
 export const OS_COLORS: Record<string, string> = {
-	Windows: '#7c7cff',
-	macOS: '#b48cff',
-	Linux: '#55ffb8',
-	Android: '#ff9f55',
-	iOS: '#55d4ff',
+	Windows: '#5b5bdd',
+	macOS: '#9066d4',
+	Linux: '#3abd8a',
+	Android: '#d97c3a',
+	iOS: '#3aaad4',
 };

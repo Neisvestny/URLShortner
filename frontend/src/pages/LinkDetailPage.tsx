@@ -1,10 +1,5 @@
 import { useMemo, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-
-import { selectIsAuthenticated } from '../features/auth/selectors';
-import { useAppSelector } from '../hooks/storeHooks';
-import { useLinkStats } from '../hooks/useLinkStats';
-
 import DonutChart from '../components/linkDetail/DonutChart';
 import MiniBar from '../components/linkDetail/MiniBar';
 import SearchInput from '../components/linkDetail/SearchInput';
@@ -12,6 +7,9 @@ import StatCard from '../components/linkDetail/StatCard';
 import StatsHeader from '../components/linkDetail/StatsHeader';
 import VisitsTable from '../components/linkDetail/VisitsTable';
 import { BROWSER_COLORS, OS_COLORS } from '../constants/colors';
+import { selectIsAuthenticated } from '../features/auth/selectors';
+import { useAppSelector } from '../hooks/storeHooks';
+import { useLinkStats } from '../hooks/useLinkStats';
 import MainLayout from '../layouts/MainLayout';
 import count from '../utils/count';
 
@@ -66,7 +64,7 @@ export default function LinkStatsPage({ code }: Props) {
 	if (isLoading) {
 		return (
 			<MainLayout>
-				<div style={{ color: '#555', padding: '40px 0' }}>
+				<div style={{ color: 'var(--muted)', padding: '40px 0' }}>
 					Загрузка...
 				</div>
 			</MainLayout>
@@ -76,7 +74,12 @@ export default function LinkStatsPage({ code }: Props) {
 	if (error) {
 		return (
 			<MainLayout>
-				<div style={{ color: '#f87171', padding: '40px 0' }}>
+				<div
+					style={{
+						color: 'var(--color-text-danger)',
+						padding: '40px 0',
+					}}
+				>
 					{error}
 				</div>
 			</MainLayout>

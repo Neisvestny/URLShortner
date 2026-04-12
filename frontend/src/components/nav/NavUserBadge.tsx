@@ -1,3 +1,4 @@
+import { ChevronDown } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authApi } from '../../api/authApi';
@@ -51,15 +52,14 @@ export default function UserBadge({ username }: UserBadgeProps) {
 
 	return (
 		<div ref={ref} style={{ position: 'relative' }}>
-			{/* Badge */}
 			<div
 				onClick={() => setOpen((v) => !v)}
 				style={{
 					display: 'flex',
 					alignItems: 'center',
 					gap: 8,
-					padding: '4px 10px 4px 4px',
-					border: `1px solid ${open ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.08)'}`,
+					padding: '3px 8px 3px 3px',
+					border: `0.5px solid ${open ? 'var(--border-hover)' : 'var(--border)'}`,
 					borderRadius: 100,
 					cursor: 'pointer',
 					transition: 'border-color 0.15s',
@@ -71,24 +71,39 @@ export default function UserBadge({ username }: UserBadgeProps) {
 						width: 26,
 						height: 26,
 						borderRadius: '50%',
-						background: 'rgba(237,237,237,0.1)',
+						background: 'var(--surface)',
 						display: 'flex',
 						alignItems: 'center',
 						justifyContent: 'center',
-						fontSize: 11,
+						fontSize: 10,
 						fontWeight: 500,
-						color: '#ededed',
+						color: 'var(--fg)',
 						letterSpacing: '0.3px',
+						flexShrink: 0,
 					}}
 				>
 					{initials}
 				</div>
-				<span style={{ fontSize: 13, color: '#ededed' }}>
+				<span
+					style={{
+						fontSize: 13,
+						color: 'var(--fg)',
+						fontWeight: 450,
+					}}
+				>
 					{username}
 				</span>
+				<ChevronDown
+					size={12}
+					strokeWidth={2}
+					style={{
+						color: 'var(--muted)',
+						transition: 'transform 0.15s',
+						transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
+					}}
+				/>
 			</div>
 
-			{/* Dropdown */}
 			{open && (
 				<div
 					style={{
@@ -96,14 +111,15 @@ export default function UserBadge({ username }: UserBadgeProps) {
 						top: 'calc(100% + 8px)',
 						right: 0,
 						minWidth: 160,
-						background: '#111',
-						border: '1px solid rgba(255,255,255,0.08)',
+						background: 'var(--surface)',
+						border: '0.5px solid var(--border)',
 						borderRadius: 10,
 						padding: 4,
 						zIndex: 100,
-						boxShadow: '0 8px 24px rgba(0,0,0,0.4)',
+						boxShadow: '0 8px 24px rgba(0,0,0,0.15)',
 					}}
 				>
+					{/* кнопки без изменений, только цвета через переменные */}
 					{menuItems.map(({ label, onClick, danger }) => (
 						<button
 							key={label}
@@ -118,14 +134,16 @@ export default function UserBadge({ username }: UserBadgeProps) {
 								textAlign: 'left',
 								fontSize: 13,
 								fontFamily: 'inherit',
-								color: danger ? '#f87171' : '#ededed',
+								color: danger
+									? 'var(--color-text-danger)'
+									: 'var(--fg)',
 								cursor: 'pointer',
 								transition: 'background 0.1s',
 							}}
 							onMouseEnter={(e) => {
 								e.currentTarget.style.background = danger
-									? 'rgba(248,113,113,0.08)'
-									: 'rgba(255,255,255,0.06)';
+									? 'var(--color-background-danger)'
+									: 'var(--surface-hover)';
 							}}
 							onMouseLeave={(e) => {
 								e.currentTarget.style.background = 'none';

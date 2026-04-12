@@ -1,11 +1,9 @@
 import { useMemo, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-
-import { selectIsAuthenticated, selectUser } from '../features/auth/selectors';
-import { useAppSelector } from '../hooks/storeHooks';
-
 import StatsHeader from '../components/links/LinkHeader';
 import StatsList from '../components/links/LinkList';
+import { selectIsAuthenticated, selectUser } from '../features/auth/selectors';
+import { useAppSelector } from '../hooks/storeHooks';
 import { useLinks } from '../hooks/useLinks';
 import MainLayout from '../layouts/MainLayout';
 
@@ -45,7 +43,7 @@ export default function StatsPage() {
 	if (isLoading) {
 		return (
 			<MainLayout>
-				<div style={{ color: '#555', padding: '40px 0' }}>
+				<div style={{ color: 'var(--muted)', padding: '40px 0' }}>
 					Загрузка...
 				</div>
 			</MainLayout>
@@ -55,7 +53,12 @@ export default function StatsPage() {
 	if (error) {
 		return (
 			<MainLayout>
-				<div style={{ color: '#f87171', padding: '40px 0' }}>
+				<div
+					style={{
+						color: 'var(--color-text-danger)',
+						padding: '40px 0',
+					}}
+				>
 					{error}
 				</div>
 			</MainLayout>

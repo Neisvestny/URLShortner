@@ -11,7 +11,7 @@ export default function AuthFooter({ isRegister, onToggle }: Props) {
 			style={{
 				textAlign: 'center',
 				fontSize: 13,
-				color: '#555',
+				color: 'var(--muted)',
 				margin: 0,
 			}}
 		>
@@ -21,13 +21,13 @@ export default function AuthFooter({ isRegister, onToggle }: Props) {
 				style={{
 					background: 'none',
 					border: 'none',
-					color: '#ededed',
+					color: 'var(--fg)',
 					cursor: 'pointer',
 					fontSize: 13,
 					fontFamily: 'inherit',
 					padding: 0,
 					textDecoration: 'underline',
-					textDecorationColor: '#333',
+					textDecorationColor: 'var(--border-hover)',
 					textUnderlineOffset: 3,
 				}}
 			>

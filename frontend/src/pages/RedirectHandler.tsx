@@ -49,8 +49,8 @@ export default function RedirectHandler() {
 				display: 'flex',
 				alignItems: 'center',
 				justifyContent: 'center',
-				background: '#0a0a0a',
-				color: '#555',
+				background: 'var(--bg)',
+				color: 'var(--muted)',
 				fontSize: 14,
 				fontFamily: "'Geist', sans-serif",
 			}}

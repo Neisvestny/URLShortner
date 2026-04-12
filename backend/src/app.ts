@@ -5,7 +5,6 @@ import 'express-async-errors';
 import { StatusCodes } from 'http-status-codes';
 import path from 'path';
 import { env } from './config/env';
-
 import { errorHandler } from './middlewares/error.middleware';
 import { requestLogger } from './middlewares/logger.middleware';
 import routes from './routes';

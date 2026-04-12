@@ -14,12 +14,12 @@ export default function NavLink({ children, onClick }: NavLinkProps) {
 			onMouseLeave={() => setHovered(false)}
 			style={{
 				fontSize: 13,
-				color: hovered ? '#ededed' : '#888',
+				color: hovered ? 'var(--fg)' : 'var(--muted)',
 				padding: '6px 12px',
 				borderRadius: 7,
 				cursor: 'pointer',
 				border: 'none',
-				background: hovered ? 'rgba(237,237,237,0.06)' : 'transparent',
+				background: hovered ? 'var(--surface)' : 'transparent',
 				transition: 'all 0.15s',
 				fontFamily: 'inherit',
 			}}

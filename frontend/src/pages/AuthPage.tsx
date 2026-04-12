@@ -28,6 +28,9 @@ export default function AuthPage() {
 					justifyContent: 'center',
 					paddingTop: 40,
 				}}
+				onKeyDown={(e) =>
+					e.key === 'Enter' && !isLoading && handleSubmit()
+				}
 			>
 				<div
 					style={{

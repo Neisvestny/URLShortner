@@ -9,8 +9,9 @@ export default function StatsFooter({ filteredLength, dataLength }: Props) {
 			style={{
 				marginTop: 12,
 				fontSize: 12,
-				color: '#333',
+				color: 'var(--muted)',
 				textAlign: 'center',
+				opacity: 0.6,
 			}}
 		>
 			{filteredLength} из {dataLength} записей

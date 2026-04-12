@@ -23,7 +23,7 @@ export default function ResultRow({
 					fontSize: 11,
 					textTransform: 'uppercase',
 					letterSpacing: '0.7px',
-					color: '#888',
+					color: 'var(--muted)',
 					marginBottom: 6,
 				}}
 			>
@@ -33,12 +33,12 @@ export default function ResultRow({
 				<div
 					style={{
 						flex: 1,
-						background: '#0a0a0a',
-						border: '1px solid rgba(255,255,255,0.08)',
+						background: 'var(--bg)',
+						border: '0.5px solid var(--border)',
 						borderRadius: 8,
 						padding: '9px 12px',
 						fontSize: 13,
-						color: muted ? '#888' : '#ededed',
+						color: muted ? 'var(--muted)' : 'var(--fg)',
 						fontFamily: "'SF Mono', 'Fira Code', monospace",
 						overflow: 'hidden',
 						textOverflow: 'ellipsis',
@@ -52,12 +52,22 @@ export default function ResultRow({
 					onMouseEnter={() => setHovered(true)}
 					onMouseLeave={() => setHovered(false)}
 					style={{
-						background: hovered ? '#222' : '#1a1a1a',
-						border: `1px solid ${copied ? 'rgba(34,197,94,0.3)' : hovered ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.08)'}`,
+						background: copied
+							? 'rgba(34,197,94,0.06)'
+							: hovered
+								? 'var(--surface-hover)'
+								: 'var(--surface)',
+						border: `0.5px solid ${
+							copied
+								? 'rgba(34,197,94,0.25)'
+								: hovered
+									? 'var(--border-hover)'
+									: 'var(--border)'
+						}`,
 						borderRadius: 8,
 						padding: '9px 14px',
 						fontSize: 13,
-						color: copied ? '#22c55e' : '#ededed',
+						color: copied ? '#22c55e' : 'var(--fg)',
 						cursor: 'pointer',
 						fontFamily: 'inherit',
 						whiteSpace: 'nowrap',

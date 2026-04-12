@@ -7,14 +7,7 @@ export default function StatsSearch({ query, setQuery }: Props) {
 	return (
 		<div style={{ position: 'relative' }}>
 			<svg
-				width="15"
-				height="15"
-				viewBox="0 0 24 24"
-				fill="none"
-				stroke="#555"
-				strokeWidth="2"
-				strokeLinecap="round"
-				strokeLinejoin="round"
+				stroke="var(--muted)"
 				style={{
 					position: 'absolute',
 					left: 14,
@@ -22,10 +15,18 @@ export default function StatsSearch({ query, setQuery }: Props) {
 					transform: 'translateY(-50%)',
 					pointerEvents: 'none',
 				}}
+				width="15"
+				height="15"
+				viewBox="0 0 24 24"
+				fill="none"
+				strokeWidth="2"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			>
 				<circle cx="11" cy="11" r="8" />
 				<line x1="21" y1="21" x2="16.65" y2="16.65" />
 			</svg>
+
 			<input
 				type="text"
 				placeholder="Поиск по коду или ссылке…"
@@ -39,9 +40,9 @@ export default function StatsSearch({ query, setQuery }: Props) {
 					boxSizing: 'border-box',
 					padding: '11px 16px 11px 40px',
 					borderRadius: 11,
-					background: 'rgba(255,255,255,0.04)',
-					border: '1px solid rgba(255,255,255,0.09)',
-					color: '#ededed',
+					background: 'var(--surface)',
+					border: '0.5px solid var(--border)',
+					color: 'var(--fg)',
 					fontSize: 14,
 					outline: 'none',
 					transition: 'border-color 0.15s',
@@ -52,10 +53,10 @@ export default function StatsSearch({ query, setQuery }: Props) {
 						'rgba(180,140,255,0.4)')
 				}
 				onBlur={(e) =>
-					(e.currentTarget.style.borderColor =
-						'rgba(255,255,255,0.09)')
+					(e.currentTarget.style.borderColor = 'var(--border)')
 				}
 			/>
+
 			{query && (
 				<button
 					onClick={() => setQuery('')}
@@ -66,7 +67,7 @@ export default function StatsSearch({ query, setQuery }: Props) {
 						transform: 'translateY(-50%)',
 						background: 'none',
 						border: 'none',
-						color: '#555',
+						color: 'var(--muted)',
 						cursor: 'pointer',
 						padding: 4,
 						display: 'flex',

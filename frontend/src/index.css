@@ -6,3 +6,36 @@ body {
 	padding: 0;
 	overscroll-behavior: none;
 }
+
+:root,
+[data-theme='dark'] {
+	--bg: #0a0a0a;
+	--fg: #ededed;
+	--muted: rgba(255, 255, 255, 0.45);
+	--logo-bg: #ededed;
+	--logo-fg: #0a0a0a;
+	--surface: #1a1a1a;
+	--surface-hover: #222222;
+	--border: rgba(255, 255, 255, 0.1);
+	--border-hover: rgba(255, 255, 255, 0.22);
+
+	--color-text-danger: #f87171;
+	--color-border-danger: #ef4444;
+	--color-background-danger: rgba(239, 68, 68, 0.08);
+}
+
+[data-theme='light'] {
+	--bg: #fafafa;
+	--fg: #111111;
+	--muted: rgba(0, 0, 0, 0.45);
+	--logo-bg: #111111;
+	--logo-fg: #ffffff;
+	--surface: #f0f0f0;
+	--surface-hover: #e8e8e8;
+	--border: rgba(0, 0, 0, 0.09);
+	--border-hover: rgba(0, 0, 0, 0.18);
+
+	--color-text-danger: #dc2626;
+	--color-border-danger: #ef4444;
+	--color-background-danger: rgba(239, 68, 68, 0.08);
+}

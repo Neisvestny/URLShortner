@@ -21,7 +21,7 @@ export default function MiniBar({
 			<span
 				style={{
 					fontSize: 12,
-					color: '#888',
+					color: 'var(--muted)',
 					width: 80,
 					flexShrink: 0,
 					overflow: 'hidden',
@@ -36,7 +36,7 @@ export default function MiniBar({
 					flex: 1,
 					height: 4,
 					borderRadius: 99,
-					background: 'rgba(255,255,255,0.06)',
+					background: 'var(--border)',
 				}}
 			>
 				<div
@@ -52,7 +52,8 @@ export default function MiniBar({
 			<span
 				style={{
 					fontSize: 12,
-					color: '#555',
+					color: 'var(--muted)',
+					opacity: 0.6,
 					width: 24,
 					textAlign: 'right',
 					flexShrink: 0,

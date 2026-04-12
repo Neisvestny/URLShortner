@@ -30,22 +30,17 @@ export default function StatsSummary({
 					style={{
 						padding: '8px 16px',
 						borderRadius: 10,
-						background: 'rgba(255,255,255,0.04)',
-						border: '1px solid rgba(255,255,255,0.07)',
+						background: 'var(--surface)',
+						border: '0.5px solid var(--border)',
 						fontSize: 13,
-						color: '#888',
+						color: 'var(--muted)',
 						display: 'flex',
 						gap: 8,
 						alignItems: 'center',
 					}}
 				>
 					<span>{s.label}</span>
-					<span
-						style={{
-							color: '#ededed',
-							fontWeight: 500,
-						}}
-					>
+					<span style={{ color: 'var(--fg)', fontWeight: 500 }}>
 						{s.value}
 					</span>
 				</div>

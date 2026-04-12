@@ -1,7 +1,6 @@
-import MainLayout from '../layouts/MainLayout';
-
 import ShortenForm from '../components/home/HomeShortenForm';
 import StatsBar from '../components/home/HomeStatsBar';
+import MainLayout from '../layouts/MainLayout';
 
 export default function HomePage() {
 	return (
@@ -12,7 +11,7 @@ export default function HomePage() {
 					flexDirection: 'column',
 					alignItems: 'center',
 					justifyContent: 'center',
-					minHeight: '100%', // ключ — не 100vh, а адаптивно
+					minHeight: '100%',
 					textAlign: 'center',
 					width: '100%',
 				}}

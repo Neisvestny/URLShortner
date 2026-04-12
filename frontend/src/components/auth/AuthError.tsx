@@ -9,10 +9,10 @@ export default function AuthError({ message }: Props) {
 				marginTop: 14,
 				marginBottom: 0,
 				fontSize: 13,
-				color: '#f87171',
+				color: 'var(--color-text-danger)',
 				padding: '10px 14px',
-				background: 'rgba(248,113,113,0.06)',
-				border: '1px solid rgba(248,113,113,0.15)',
+				background: 'var(--color-background-danger)',
+				border: '0.5px solid var(--color-border-danger)',
 				borderRadius: 8,
 			}}
 		>

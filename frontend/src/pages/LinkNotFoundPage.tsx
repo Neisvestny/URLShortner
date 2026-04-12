@@ -11,8 +11,8 @@ export default function LinkNotFoundPage() {
 				flexDirection: 'column',
 				alignItems: 'center',
 				justifyContent: 'center',
-				background: '#0a0a0a',
-				color: '#ededed',
+				background: 'var(--bg)',
+				color: 'var(--fg)',
 				fontFamily: "'Geist', 'Inter', sans-serif",
 				gap: 16,
 			}}
@@ -20,7 +20,7 @@ export default function LinkNotFoundPage() {
 			<p
 				style={{
 					fontSize: 11,
-					color: '#555',
+					color: 'var(--muted)',
 					letterSpacing: '0.1em',
 					textTransform: 'uppercase',
 					margin: 0,
@@ -34,11 +34,12 @@ export default function LinkNotFoundPage() {
 					fontWeight: 500,
 					letterSpacing: '-1.5px',
 					margin: 0,
+					color: 'var(--fg)',
 				}}
 			>
 				Ссылка недействительна.
 			</h1>
-			<p style={{ fontSize: 14, color: '#555', margin: 0 }}>
+			<p style={{ fontSize: 14, color: 'var(--muted)', margin: 0 }}>
 				Возможно, она была удалена или никогда не существовала.
 			</p>
 			<button
@@ -46,8 +47,8 @@ export default function LinkNotFoundPage() {
 				style={{
 					marginTop: 8,
 					padding: '10px 20px',
-					background: '#ededed',
-					color: '#0a0a0a',
+					background: 'var(--fg)',
+					color: 'var(--bg)',
 					border: 'none',
 					borderRadius: 8,
 					fontSize: 13,

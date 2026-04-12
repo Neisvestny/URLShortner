@@ -31,6 +31,7 @@ export default function StatsHeader({ code, total, originalUrl }: Props) {
 						fontWeight: 500,
 						letterSpacing: '-1px',
 						margin: 0,
+						color: 'var(--fg)',
 					}}
 				>
 					/{code}
@@ -45,23 +46,26 @@ export default function StatsHeader({ code, total, originalUrl }: Props) {
 						width: 32,
 						height: 32,
 						borderRadius: 8,
-						border: '1px solid',
-						borderColor: copied ? '#4ade80' : '#222',
-						background: copied ? 'rgba(74, 222, 128, 0.1)' : '#111',
-						color: copied ? '#4ade80' : '#aaa',
+						border: '0.5px solid',
+						borderColor: copied ? '#4ade80' : 'var(--border)',
+						background: copied
+							? 'rgba(74,222,128,0.08)'
+							: 'var(--surface)',
+						color: copied ? '#4ade80' : 'var(--muted)',
 						cursor: 'pointer',
 						transition: 'all 0.2s ease',
 					}}
 					onMouseEnter={(e) => {
 						if (!copied) {
-							e.currentTarget.style.color = '#fff';
-							e.currentTarget.style.borderColor = '#333';
+							e.currentTarget.style.color = 'var(--fg)';
+							e.currentTarget.style.borderColor =
+								'var(--border-hover)';
 						}
 					}}
 					onMouseLeave={(e) => {
 						if (!copied) {
-							e.currentTarget.style.color = '#aaa';
-							e.currentTarget.style.borderColor = '#222';
+							e.currentTarget.style.color = 'var(--muted)';
+							e.currentTarget.style.borderColor = 'var(--border)';
 						}
 					}}
 				>
@@ -83,20 +87,25 @@ export default function StatsHeader({ code, total, originalUrl }: Props) {
 					rel="noopener noreferrer"
 					style={{
 						fontSize: 13,
-						color: '#555',
+						color: 'var(--muted)',
 						textDecoration: 'none',
 						overflow: 'hidden',
 						textOverflow: 'ellipsis',
 						whiteSpace: 'nowrap',
 						maxWidth: 500,
+						transition: 'color 0.15s',
 					}}
-					onMouseEnter={(e) => (e.currentTarget.style.color = '#888')}
-					onMouseLeave={(e) => (e.currentTarget.style.color = '#555')}
+					onMouseEnter={(e) =>
+						(e.currentTarget.style.color = 'var(--fg)')
+					}
+					onMouseLeave={(e) =>
+						(e.currentTarget.style.color = 'var(--muted)')
+					}
 				>
 					{originalUrl}
 				</a>
 
-				<span style={{ fontSize: 13, color: '#555' }}>
+				<span style={{ fontSize: 13, color: 'var(--muted)' }}>
 					| {total} переходов
 				</span>
 			</div>

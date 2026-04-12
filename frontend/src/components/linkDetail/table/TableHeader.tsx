@@ -10,7 +10,7 @@ export function TableHeader({ sortKey, sortAsc, onSort }: Props) {
 	const thStyle = (k: SortKey): React.CSSProperties => ({
 		padding: '10px 14px',
 		fontSize: 11,
-		color: sortKey === k ? '#b48cff' : '#555',
+		color: sortKey === k ? '#b48cff' : 'var(--muted)',
 		textTransform: 'uppercase',
 		letterSpacing: '0.05em',
 		cursor: 'pointer',
@@ -46,8 +46,8 @@ export function TableHeader({ sortKey, sortAsc, onSort }: Props) {
 	return (
 		<tr
 			style={{
-				borderBottom: '1px solid rgba(255,255,255,0.07)',
-				background: 'rgba(255,255,255,0.02)',
+				borderBottom: '0.5px solid var(--border)',
+				background: 'var(--bg)',
 			}}
 		>
 			{(['date', 'region', 'browser', 'os'] as SortKey[]).map((k) => (
@@ -69,7 +69,7 @@ export function TableHeader({ sortKey, sortAsc, onSort }: Props) {
 				style={{
 					padding: '10px 14px',
 					fontSize: 11,
-					color: '#555',
+					color: 'var(--muted)',
 					textTransform: 'uppercase',
 					letterSpacing: '0.05em',
 					textAlign: 'left',

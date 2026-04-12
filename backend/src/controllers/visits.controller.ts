@@ -2,7 +2,7 @@ import { pool } from '@/db';
 import { AppError } from '@/utils/AppError';
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { UAParser } from 'ua-parser-js'; // ← именованный импорт
+import { UAParser } from 'ua-parser-js';
 
 export const redirectBySlug = async (req: Request, res: Response) => {
 	const { slug } = req.params;
@@ -25,18 +25,22 @@ export const redirectBySlug = async (req: Request, res: Response) => {
 	const parser = new UAParser(req.headers['user-agent'] ?? '');
 	const ua = parser.getResult();
 
+	// Получаем IP в любом случае
 	const rawIp =
 		(req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() ??
 		req.socket.remoteAddress ??
-		null;
+		req.connection.remoteAddress ??
+		(req.headers['x-real-ip'] as string) ??
+		'unknown';
 
-	const ip = rawIp?.replace(/^::ffff:/, '') ?? null;
+	const ip = rawIp.replace(/^::ffff:/, '');
 
 	(async () => {
 		let country: string | null = null;
 		let region: string | null = null;
 
-		if (ip && ip !== '127.0.0.1' && ip !== '::1' && ip !== 'localhost') {
+		// Пытаемся получить геолокацию только для внешних IP
+		if (ip && ip !== 'unknown' && ip !== '127.0.0.1' && ip !== '::1') {
 			try {
 				const geo = await fetch(
 					`http://ip-api.com/json/${ip}?fields=country,regionName`,

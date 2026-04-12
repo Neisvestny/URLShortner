@@ -16,12 +16,12 @@ export function VisitRow({ visit, index, totalRows }: VisitRowProps) {
 			style={{
 				borderBottom:
 					index < totalRows - 1
-						? '1px solid rgba(255,255,255,0.05)'
+						? '0.5px solid var(--border)'
 						: 'none',
 				transition: 'background 0.12s',
 			}}
 			onMouseEnter={(e) =>
-				(e.currentTarget.style.background = 'rgba(255,255,255,0.03)')
+				(e.currentTarget.style.background = 'var(--surface)')
 			}
 			onMouseLeave={(e) =>
 				(e.currentTarget.style.background = 'transparent')
@@ -30,7 +30,7 @@ export function VisitRow({ visit, index, totalRows }: VisitRowProps) {
 			<td
 				style={{
 					padding: '13px 14px',
-					color: '#888',
+					color: 'var(--muted)',
 					whiteSpace: 'nowrap',
 				}}
 			>
@@ -73,8 +73,9 @@ export function VisitRow({ visit, index, totalRows }: VisitRowProps) {
 					{visit.browser ?? 'Неизвестно'}
 					<span
 						style={{
-							color: '#555',
+							color: 'var(--muted)',
 							fontSize: 11,
+							opacity: 0.6,
 						}}
 					>
 						{visit.browser_version}
@@ -109,9 +110,10 @@ export function VisitRow({ visit, index, totalRows }: VisitRowProps) {
 			<td
 				style={{
 					padding: '13px 14px',
-					color: '#555',
+					color: 'var(--muted)',
 					fontFamily: 'monospace',
 					fontSize: 12,
+					opacity: 0.7,
 				}}
 			>
 				{visit.ip}

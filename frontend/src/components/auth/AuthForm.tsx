@@ -6,10 +6,10 @@ import getPasswordStrength from '../../utils/getPasswordStrength';
 const inputStyle: React.CSSProperties = {
 	width: '100%',
 	padding: '10px 14px',
-	background: '#111',
-	border: '1px solid #222',
+	background: 'var(--surface)',
+	border: '0.5px solid var(--border)',
 	borderRadius: 8,
-	color: '#ededed',
+	color: 'var(--fg)',
 	fontSize: 14,
 	outline: 'none',
 	boxSizing: 'border-box',
@@ -20,7 +20,7 @@ const inputStyle: React.CSSProperties = {
 const labelStyle: React.CSSProperties = {
 	display: 'block',
 	fontSize: 13,
-	color: '#888',
+	color: 'var(--muted)',
 	marginBottom: 6,
 	letterSpacing: '0.01em',
 };
@@ -62,8 +62,8 @@ export default function AuthForm({ form, isRegister, onChange }: Props) {
 							...inputStyle,
 							borderColor:
 								focusedField === 'username'
-									? '#333'
-									: '#1f1f1f',
+									? 'var(--border-hover)'
+									: 'var(--border)',
 						}}
 					/>
 				</div>
@@ -81,7 +81,9 @@ export default function AuthForm({ form, isRegister, onChange }: Props) {
 					style={{
 						...inputStyle,
 						borderColor:
-							focusedField === 'email' ? '#333' : '#1f1f1f',
+							focusedField === 'email'
+								? 'var(--border-hover)'
+								: 'var(--border)',
 					}}
 				/>
 			</div>
@@ -111,6 +113,7 @@ export default function AuthForm({ form, isRegister, onChange }: Props) {
 							transform: 'translateY(-50%)',
 							background: 'none',
 							border: 'none',
+							color: 'var(--muted)',
 							cursor: 'pointer',
 						}}
 					>
@@ -143,8 +146,8 @@ export default function AuthForm({ form, isRegister, onChange }: Props) {
 									paddingRight: 40,
 									borderColor:
 										focusedField === 'confirmPassword'
-											? '#333'
-											: '#1f1f1f',
+											? 'var(--border-hover)'
+											: 'var(--border)',
 								}}
 							/>
 							<button
@@ -159,6 +162,7 @@ export default function AuthForm({ form, isRegister, onChange }: Props) {
 									transform: 'translateY(-50%)',
 									background: 'none',
 									border: 'none',
+									color: 'var(--muted)',
 									cursor: 'pointer',
 								}}
 							>
@@ -177,7 +181,7 @@ export default function AuthForm({ form, isRegister, onChange }: Props) {
 								style={{
 									height: 4,
 									borderRadius: 4,
-									background: '#222',
+									background: 'var(--border)',
 									overflow: 'hidden',
 								}}
 							>

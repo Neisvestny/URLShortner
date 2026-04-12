@@ -23,7 +23,7 @@ export default function StatsHeader({
 		<div style={{ marginBottom: 40 }}>
 			<p
 				style={{
-					color: '#555',
+					color: 'var(--muted)',
 					fontSize: 13,
 					margin: '0 0 8px',
 					letterSpacing: '0.05em',
@@ -39,6 +39,7 @@ export default function StatsHeader({
 					letterSpacing: '-1.5px',
 					margin: '0 0 24px',
 					lineHeight: 1.1,
+					color: 'var(--fg)',
 				}}
 			>
 				Ваши ссылки

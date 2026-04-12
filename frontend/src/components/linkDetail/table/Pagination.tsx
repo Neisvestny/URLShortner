@@ -15,22 +15,21 @@ export function Pagination({
 		width: 36,
 		height: 36,
 		borderRadius: 8,
-		border: '1px solid rgba(255,255,255,0.07)',
-		background: disabled
-			? 'rgba(255,255,255,0.02)'
-			: 'rgba(255,255,255,0.03)',
-		color: disabled ? '#666' : '#b48cff',
+		border: '0.5px solid var(--border)',
+		background: 'var(--surface)',
+		color: disabled ? 'var(--muted)' : '#b48cff',
 		display: 'flex',
 		alignItems: 'center',
 		justifyContent: 'center',
 		cursor: disabled ? 'not-allowed' : 'pointer',
 		transition: 'all 0.12s ease',
 		userSelect: 'none',
+		opacity: disabled ? 0.4 : 1,
 	});
 
 	const paginationTextStyle: React.CSSProperties = {
 		fontSize: 13,
-		color: '#888',
+		color: 'var(--muted)',
 		display: 'flex',
 		alignItems: 'center',
 		padding: '0 16px',
@@ -46,8 +45,8 @@ export function Pagination({
 				alignItems: 'center',
 				gap: 8,
 				padding: '16px 20px',
-				borderTop: '1px solid rgba(255,255,255,0.07)',
-				background: 'rgba(255,255,255,0.02)',
+				borderTop: '0.5px solid var(--border)',
+				background: 'var(--bg)',
 			}}
 		>
 			<button

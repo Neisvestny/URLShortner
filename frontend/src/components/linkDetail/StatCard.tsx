@@ -12,8 +12,8 @@ export default function StatCard({
 			style={{
 				padding: '20px 22px',
 				borderRadius: 14,
-				background: 'rgba(255,255,255,0.03)',
-				border: '1px solid rgba(255,255,255,0.07)',
+				background: 'var(--surface)',
+				border: '0.5px solid var(--border)',
 				flex: 1,
 				minWidth: 0,
 				...style,
@@ -23,7 +23,7 @@ export default function StatCard({
 				style={{
 					margin: '0 0 16px',
 					fontSize: 11,
-					color: '#555',
+					color: 'var(--muted)',
 					textTransform: 'uppercase',
 					letterSpacing: '0.06em',
 				}}
