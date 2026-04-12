@@ -49,9 +49,20 @@ export const getUserLinks = async (req: Request, res: Response) => {
 };
 
 export const createLink = async (req: Request, res: Response) => {
-	const { userId } = getTokenPayload(req);
-	const { original_url } = req.body;
+	let userId: string | null = null;
+	try {
+		const token = req.cookies?.['token'];
+		if (token) {
+			const payload = jwt.verify(token, env.JWT_SECRET) as {
+				userId: string;
+			};
+			userId = payload.userId;
+		}
+	} catch {
+		// невалидный токен — просто игнорируем
+	}
 
+	const { original_url } = req.body;
 	if (!original_url) {
 		throw new AppError(
 			StatusCodes.BAD_REQUEST,
@@ -60,13 +71,13 @@ export const createLink = async (req: Request, res: Response) => {
 		);
 	}
 
-	const slug = nanoid(6); // asd123
+	const slug = nanoid(6);
 
 	const result = await pool.query(
 		`INSERT INTO links (slug, original_url, user_id)
      VALUES ($1, $2, $3)
      RETURNING id, slug, original_url, created_at`,
-		[slug, original_url, userId],
+		[slug, original_url, userId], // userId может быть null
 	);
 
 	res.status(StatusCodes.CREATED).json({ link: result.rows[0] });

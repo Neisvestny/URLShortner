@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { selectIsAuthenticated } from '../../features/auth/selectors.ts';
+import { useAppSelector } from '../../hooks/storeHooks.ts';
 import { useShortener } from '../../hooks/useShortener';
 import type { CopyKey } from '../../types/shortenResult.ts';
 import { copyToClipboard } from '../../utils/copyToClipboard';
@@ -15,6 +17,7 @@ export default function ShortenForm() {
 		stats: false,
 	});
 	const { loading, error, result, shorten, setError } = useShortener();
+	const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
 	function handleShorten() {
 		const trimmed = url.trim();
@@ -80,6 +83,7 @@ export default function ShortenForm() {
 					result={result}
 					copied={copied}
 					onCopy={handleCopy}
+					showStats={isAuthenticated}
 				/>
 			)}
 
