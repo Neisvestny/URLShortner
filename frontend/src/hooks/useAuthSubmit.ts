@@ -21,10 +21,7 @@ export const useAuthSubmit = (
 			return false;
 		}
 
-		if (
-			isRegister &&
-			getPasswordStrength(form.password).label === 'Слабый'
-		) {
+		if (isRegister && getPasswordStrength(form.password).label === 'Слабый') {
 			onError('Пароль слишком слабый');
 			return false;
 		}

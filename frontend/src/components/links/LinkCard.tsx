@@ -29,16 +29,12 @@ export default function StatsCard({ link, index, query, maxVisits }: Props) {
 				cursor: 'pointer',
 			}}
 			onMouseEnter={(e) => {
-				(e.currentTarget as HTMLDivElement).style.background =
-					'var(--surface-hover)';
-				(e.currentTarget as HTMLDivElement).style.borderColor =
-					'var(--border-hover)';
+				(e.currentTarget as HTMLDivElement).style.background = 'var(--surface-hover)';
+				(e.currentTarget as HTMLDivElement).style.borderColor = 'var(--border-hover)';
 			}}
 			onMouseLeave={(e) => {
-				(e.currentTarget as HTMLDivElement).style.background =
-					'var(--surface)';
-				(e.currentTarget as HTMLDivElement).style.borderColor =
-					'var(--border)';
+				(e.currentTarget as HTMLDivElement).style.background = 'var(--surface)';
+				(e.currentTarget as HTMLDivElement).style.borderColor = 'var(--border)';
 			}}
 		>
 			<div
@@ -64,10 +60,7 @@ export default function StatsCard({ link, index, query, maxVisits }: Props) {
 								fontSize: 11,
 								fontWeight: 500,
 								color: index === 0 ? '#b48cff' : 'var(--muted)',
-								background:
-									index === 0
-										? 'rgba(180,140,255,0.1)'
-										: 'var(--bg)',
+								background: index === 0 ? 'rgba(180,140,255,0.1)' : 'var(--bg)',
 								border: `0.5px solid ${index === 0 ? 'rgba(180,140,255,0.25)' : 'var(--border)'}`,
 								borderRadius: 6,
 								padding: '2px 7px',
@@ -150,14 +143,11 @@ export default function StatsCard({ link, index, query, maxVisits }: Props) {
 							}}
 						>
 							{link.last_visit
-								? new Date(link.last_visit).toLocaleDateString(
-										'ru',
-										{
-											day: 'numeric',
-											month: 'short',
-											year: 'numeric',
-										},
-									)
+								? new Date(link.last_visit).toLocaleDateString('ru', {
+										day: 'numeric',
+										month: 'short',
+										year: 'numeric',
+									})
 								: '—'}
 						</p>
 						<p
@@ -178,9 +168,7 @@ export default function StatsCard({ link, index, query, maxVisits }: Props) {
 						onClick={(e) => {
 							e.stopPropagation();
 
-							navigator.clipboard.writeText(
-								`${window.location.origin}/${link.slug}`,
-							);
+							navigator.clipboard.writeText(`${window.location.origin}/${link.slug}`);
 							setCopied(true);
 
 							setTimeout(() => setCopied(false), 1500);
@@ -201,18 +189,14 @@ export default function StatsCard({ link, index, query, maxVisits }: Props) {
 							transition: 'color 0.15s, border-color 0.15s',
 						}}
 						onMouseEnter={(e) => {
-							(e.currentTarget as HTMLButtonElement).style.color =
-								'var(--fg)';
-							(
-								e.currentTarget as HTMLButtonElement
-							).style.borderColor = 'var(--border-hover)';
+							(e.currentTarget as HTMLButtonElement).style.color = 'var(--fg)';
+							(e.currentTarget as HTMLButtonElement).style.borderColor =
+								'var(--border-hover)';
 						}}
 						onMouseLeave={(e) => {
-							(e.currentTarget as HTMLButtonElement).style.color =
-								'var(--muted)';
-							(
-								e.currentTarget as HTMLButtonElement
-							).style.borderColor = 'var(--border)';
+							(e.currentTarget as HTMLButtonElement).style.color = 'var(--muted)';
+							(e.currentTarget as HTMLButtonElement).style.borderColor =
+								'var(--border)';
 						}}
 					>
 						{copied ? <Check size={14} /> : <Copy size={14} />}

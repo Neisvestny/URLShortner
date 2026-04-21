@@ -8,13 +8,7 @@ type Props = {
 	onSubmit: () => void;
 };
 
-export default function UrlInput({
-	value,
-	error,
-	loading,
-	onChange,
-	onSubmit,
-}: Props) {
+export default function UrlInput({ value, error, loading, onChange, onSubmit }: Props) {
 	return (
 		<div style={{ display: 'flex', gap: 8, marginBottom: error ? 8 : 0 }}>
 			<input
@@ -53,9 +47,7 @@ export default function UrlInput({
 				onClick={onSubmit}
 				disabled={loading}
 				style={{
-					background: loading
-						? 'var(--fg-muted, var(--muted))'
-						: 'var(--fg)',
+					background: loading ? 'var(--fg-muted, var(--muted))' : 'var(--fg)',
 					color: 'var(--bg)',
 					border: 'none',
 					borderRadius: 10,

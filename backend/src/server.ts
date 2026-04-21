@@ -1,10 +1,11 @@
-import dotenv from 'dotenv';
-dotenv.config();
-
 import { env } from '@/config/env';
-import { connectDB, pool } from '@/db';
+import { connectDB } from '@/db';
 import { logger } from '@/lib/logger';
+import { prisma } from '@/lib/prisma';
+import dotenv from 'dotenv';
 import app from './app';
+
+dotenv.config();
 
 async function startServer() {
 	await connectDB();
@@ -12,6 +13,7 @@ async function startServer() {
 	const server = app.listen(env.PORT, () => {
 		if (env.NODE_ENV === 'development') {
 			logger.info(`Server started on http://${env.HOST}:${env.PORT}`);
+			logger.info(`Prisma Studio: npx prisma studio`);
 		} else {
 			logger.info({ port: env.PORT }, 'server started');
 		}
@@ -21,7 +23,7 @@ async function startServer() {
 		logger.info('Shutting down...');
 
 		server.close(async () => {
-			await pool.end();
+			await prisma.$disconnect();
 			logger.info('Server & DB closed');
 			process.exit(0);
 		});

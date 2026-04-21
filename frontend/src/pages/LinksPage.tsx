@@ -26,10 +26,7 @@ export default function StatsPage() {
 		if (!q) return sorted;
 
 		return sorted.filter((l) => {
-			return (
-				normalize(l.slug).includes(q) ||
-				normalize(l.original_url).includes(q)
-			);
+			return normalize(l.slug).includes(q) || normalize(l.original_url).includes(q);
 		});
 	}, [query, sorted]);
 
@@ -43,9 +40,7 @@ export default function StatsPage() {
 	if (isLoading) {
 		return (
 			<MainLayout>
-				<div style={{ color: 'var(--muted)', padding: '40px 0' }}>
-					Загрузка...
-				</div>
+				<div style={{ color: 'var(--muted)', padding: '40px 0' }}>Загрузка...</div>
 			</MainLayout>
 		);
 	}
@@ -85,11 +80,7 @@ export default function StatsPage() {
 					gap: 12,
 				}}
 			>
-				<StatsList
-					links={filtered}
-					query={query}
-					maxVisits={maxVisits}
-				/>
+				<StatsList links={filtered} query={query} maxVisits={maxVisits} />
 			</div>
 		</MainLayout>
 	);

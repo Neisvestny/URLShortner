@@ -4,11 +4,7 @@ type Props = {
 	onClick: () => void;
 };
 
-export default function AuthSubmitButton({
-	isLoading,
-	isRegister,
-	onClick,
-}: Props) {
+export default function AuthSubmitButton({ isLoading, isRegister, onClick }: Props) {
 	return (
 		<button
 			onClick={onClick}
@@ -30,11 +26,7 @@ export default function AuthSubmitButton({
 				letterSpacing: '-0.01em',
 			}}
 		>
-			{isLoading
-				? 'Загрузка...'
-				: isRegister
-					? 'Создать аккаунт'
-					: 'Войти'}
+			{isLoading ? 'Загрузка...' : isRegister ? 'Создать аккаунт' : 'Войти'}
 		</button>
 	);
 }

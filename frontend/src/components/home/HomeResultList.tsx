@@ -11,12 +11,7 @@ type ResultListProps = {
 	onCopy: (text: string, key: CopyKey) => void;
 };
 
-export default function ResultList({
-	result,
-	copied,
-	onCopy,
-	showStats,
-}: ResultListProps) {
+export default function ResultList({ result, copied, onCopy, showStats }: ResultListProps) {
 	const navigate = useNavigate();
 
 	return (

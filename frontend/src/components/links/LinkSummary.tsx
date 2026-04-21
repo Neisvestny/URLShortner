@@ -4,11 +4,7 @@ type Props = {
 	topSlug: string;
 };
 
-export default function StatsSummary({
-	totalLinks,
-	totalVisits,
-	topSlug,
-}: Props) {
+export default function StatsSummary({ totalLinks, totalVisits, topSlug }: Props) {
 	const items = [
 		{ label: 'Ссылок', value: totalLinks },
 		{ label: 'Всего переходов', value: totalVisits.toLocaleString('ru') },
@@ -40,9 +36,7 @@ export default function StatsSummary({
 					}}
 				>
 					<span>{s.label}</span>
-					<span style={{ color: 'var(--fg)', fontWeight: 500 }}>
-						{s.value}
-					</span>
+					<span style={{ color: 'var(--fg)', fontWeight: 500 }}>{s.value}</span>
 				</div>
 			))}
 		</div>

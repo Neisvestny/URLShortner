@@ -33,11 +33,7 @@ export function TableHeader({ sortKey, sortAsc, onSort }: Props) {
 			style={{ marginLeft: 4, opacity: sortKey === k ? 1 : 0.25 }}
 		>
 			<path
-				d={
-					sortAsc && sortKey === k
-						? 'M5 2L9 8H1L5 2Z'
-						: 'M5 8L1 2H9L5 8Z'
-				}
+				d={sortAsc && sortKey === k ? 'M5 2L9 8H1L5 2Z' : 'M5 8L1 2H9L5 8Z'}
 				fill="currentColor"
 			/>
 		</svg>

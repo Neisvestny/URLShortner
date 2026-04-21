@@ -13,9 +13,7 @@ interface UseAuthFormReturn {
 	isLoading: boolean;
 	error: string | null;
 	isRegister: boolean;
-	handleChange: (
-		field: keyof FormState,
-	) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+	handleChange: (field: keyof FormState) => (e: React.ChangeEvent<HTMLInputElement>) => void;
 	handleModeSwitch: (newMode: AuthMode) => void;
 	handleSubmit: () => Promise<void>;
 }
@@ -30,15 +28,10 @@ export const useAuthForm = (): UseAuthFormReturn => {
 		}
 	}, [isAuth, navigate]);
 
-	const { mode, form, error, setError, handleChange, handleModeSwitch } =
-		useAuthFormState();
+	const { mode, form, error, setError, handleChange, handleModeSwitch } = useAuthFormState();
 	const isRegister = mode === 'register';
 
-	const { isLoading, handleSubmit } = useAuthSubmit(
-		form,
-		isRegister,
-		setError,
-	);
+	const { isLoading, handleSubmit } = useAuthSubmit(form, isRegister, setError);
 
 	return {
 		mode,

@@ -48,9 +48,7 @@ export default function StatsHeader({ code, total, originalUrl }: Props) {
 						borderRadius: 8,
 						border: '0.5px solid',
 						borderColor: copied ? '#4ade80' : 'var(--border)',
-						background: copied
-							? 'rgba(74,222,128,0.08)'
-							: 'var(--surface)',
+						background: copied ? 'rgba(74,222,128,0.08)' : 'var(--surface)',
 						color: copied ? '#4ade80' : 'var(--muted)',
 						cursor: 'pointer',
 						transition: 'all 0.2s ease',
@@ -58,8 +56,7 @@ export default function StatsHeader({ code, total, originalUrl }: Props) {
 					onMouseEnter={(e) => {
 						if (!copied) {
 							e.currentTarget.style.color = 'var(--fg)';
-							e.currentTarget.style.borderColor =
-								'var(--border-hover)';
+							e.currentTarget.style.borderColor = 'var(--border-hover)';
 						}
 					}}
 					onMouseLeave={(e) => {
@@ -95,19 +92,13 @@ export default function StatsHeader({ code, total, originalUrl }: Props) {
 						maxWidth: 500,
 						transition: 'color 0.15s',
 					}}
-					onMouseEnter={(e) =>
-						(e.currentTarget.style.color = 'var(--fg)')
-					}
-					onMouseLeave={(e) =>
-						(e.currentTarget.style.color = 'var(--muted)')
-					}
+					onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--fg)')}
+					onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--muted)')}
 				>
 					{originalUrl}
 				</a>
 
-				<span style={{ fontSize: 13, color: 'var(--muted)' }}>
-					| {total} переходов
-				</span>
+				<span style={{ fontSize: 13, color: 'var(--muted)' }}>| {total} переходов</span>
 			</div>
 		</div>
 	);

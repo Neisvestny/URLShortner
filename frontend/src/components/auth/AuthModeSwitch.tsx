@@ -32,13 +32,9 @@ export default function AuthModeSwitch({ mode, onChange }: Props) {
 						fontWeight: 500,
 						fontFamily: 'inherit',
 						transition: 'all 0.15s',
-						background:
-							mode === m ? 'var(--surface)' : 'transparent',
+						background: mode === m ? 'var(--surface)' : 'transparent',
 						color: mode === m ? 'var(--fg)' : 'var(--muted)',
-						boxShadow:
-							mode === m
-								? '0 0 0 0.5px var(--border-hover)'
-								: 'none',
+						boxShadow: mode === m ? '0 0 0 0.5px var(--border-hover)' : 'none',
 					}}
 				>
 					{m === 'login' ? 'Вход' : 'Регистрация'}

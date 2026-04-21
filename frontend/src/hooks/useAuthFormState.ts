@@ -12,12 +12,10 @@ export const useAuthFormState = () => {
 	});
 	const [error, setError] = useState<string | null>(null);
 
-	const handleChange =
-		(field: keyof FormState) =>
-		(e: React.ChangeEvent<HTMLInputElement>) => {
-			setForm((prev) => ({ ...prev, [field]: e.target.value }));
-			setError(null);
-		};
+	const handleChange = (field: keyof FormState) => (e: React.ChangeEvent<HTMLInputElement>) => {
+		setForm((prev) => ({ ...prev, [field]: e.target.value }));
+		setError(null);
+	};
 
 	const handleModeSwitch = (newMode: AuthMode) => {
 		setMode(newMode);

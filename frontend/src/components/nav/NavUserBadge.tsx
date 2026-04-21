@@ -25,8 +25,7 @@ export default function UserBadge({ username }: UserBadgeProps) {
 			}
 		}
 		document.addEventListener('mousedown', handleClickOutside);
-		return () =>
-			document.removeEventListener('mousedown', handleClickOutside);
+		return () => document.removeEventListener('mousedown', handleClickOutside);
 	}, []);
 
 	const handleLogout = async () => {
@@ -134,9 +133,7 @@ export default function UserBadge({ username }: UserBadgeProps) {
 								textAlign: 'left',
 								fontSize: 13,
 								fontFamily: 'inherit',
-								color: danger
-									? 'var(--color-text-danger)'
-									: 'var(--fg)',
+								color: danger ? 'var(--color-text-danger)' : 'var(--fg)',
 								cursor: 'pointer',
 								transition: 'background 0.1s',
 							}}

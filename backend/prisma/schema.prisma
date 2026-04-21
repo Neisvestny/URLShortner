@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+
+model User {
+  id            Int       @id @default(autoincrement())
+  username      String    @unique
+  email         String    @unique
+  password_hash String    @map("password_hash")
+  created_at    DateTime  @default(now()) @map("created_at")
+  updated_at    DateTime  @updatedAt @map("updated_at")
+  
+  links Link[]
+  
+  @@map("users")
+}
+
+model Link {
+  id           Int      @id @default(autoincrement())
+  slug         String   @unique
+  original_url String   @map("original_url")
+  created_at   DateTime @default(now()) @map("created_at")
+  user_id      Int?     @map("user_id")
+
+  user   User?   @relation(fields: [user_id], references: [id], onDelete: SetNull)
+  visits Visit[]
+
+  @@index([user_id])
+  @@map("links")
+}
+
+model Visit {
+  id              Int       @id @default(autoincrement())
+  link_id         Int       @map("link_id")
+  ip              String?
+  browser         String?
+  browser_version String?   @map("browser_version")
+  os              String?
+  country         String?
+  region          String?
+  visited_at      DateTime  @default(now()) @map("visited_at")
+  
+  link            Link      @relation(fields: [link_id], references: [id], onDelete: Cascade)
+  
+  @@index([link_id])
+  @@index([visited_at])
+  @@map("visits")
+}

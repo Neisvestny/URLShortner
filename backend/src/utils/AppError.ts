@@ -5,12 +5,7 @@ export class AppError extends Error {
 	code: string;
 	details?: any;
 
-	constructor(
-		statusCode: StatusCodes,
-		code: string,
-		message: string,
-		details?: any,
-	) {
+	constructor(statusCode: StatusCodes, code: string, message: string, details?: any) {
 		super(message);
 		this.statusCode = statusCode;
 		this.code = code;

@@ -1,8 +1,4 @@
-import {
-	createAsyncThunk,
-	createSlice,
-	type PayloadAction,
-} from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { authApi } from '../../api/authApi';
 import type { User } from '../../types/user';
 
@@ -18,17 +14,14 @@ const initialState: AuthState = {
 	isInitialized: false,
 };
 
-export const initAuth = createAsyncThunk(
-	'auth/init',
-	async (_, { dispatch }) => {
-		try {
-			const { data } = await authApi.me();
-			dispatch(authSlice.actions.setUser(data.user));
-		} catch {
-			dispatch(authSlice.actions.setInitialized());
-		}
-	},
-);
+export const initAuth = createAsyncThunk('auth/init', async (_, { dispatch }) => {
+	try {
+		const { data } = await authApi.me();
+		dispatch(authSlice.actions.setUser(data.user));
+	} catch {
+		dispatch(authSlice.actions.setInitialized());
+	}
+});
 
 const authSlice = createSlice({
 	name: 'auth',

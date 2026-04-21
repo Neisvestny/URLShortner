@@ -11,9 +11,13 @@ RUN npm run build
 FROM node:20-alpine AS backend-builder
 
 WORKDIR /app/backend
+
+RUN apk add --no-cache openssl
+
 COPY backend/package*.json ./
 RUN npm ci
 COPY backend/ ./
+RUN npx prisma generate
 RUN npm run build
 
 # ── Stage 3: prod runner ───────────────────────────────────
@@ -21,9 +25,14 @@ FROM node:20-alpine AS runner
 
 WORKDIR /app
 
+RUN apk add --no-cache openssl
+
 # Только prod зависимости
 COPY backend/package*.json ./
 RUN npm ci --omit=dev
+
+COPY backend/prisma ./prisma
+RUN npx prisma generate
 
 # Скомпилированный бэк
 COPY --from=backend-builder /app/backend/dist ./dist

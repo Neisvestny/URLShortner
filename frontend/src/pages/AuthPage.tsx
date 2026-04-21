@@ -28,9 +28,7 @@ export default function AuthPage() {
 					justifyContent: 'center',
 					paddingTop: 40,
 				}}
-				onKeyDown={(e) =>
-					e.key === 'Enter' && !isLoading && handleSubmit()
-				}
+				onKeyDown={(e) => e.key === 'Enter' && !isLoading && handleSubmit()}
 			>
 				<div
 					style={{
@@ -45,11 +43,7 @@ export default function AuthPage() {
 					<AuthModeSwitch mode={mode} onChange={handleModeSwitch} />
 
 					{/* Поля формы */}
-					<AuthForm
-						form={form}
-						isRegister={isRegister}
-						onChange={handleChange}
-					/>
+					<AuthForm form={form} isRegister={isRegister} onChange={handleChange} />
 
 					{/* Ошибка */}
 					{error && <AuthError message={error} />}
@@ -65,10 +59,7 @@ export default function AuthPage() {
 					<AuthSeparator />
 
 					{/* Подсказка переключения */}
-					<AuthFooter
-						isRegister={isRegister}
-						onToggle={handleModeSwitch}
-					/>
+					<AuthFooter isRegister={isRegister} onToggle={handleModeSwitch} />
 				</div>
 			</div>
 		</MainLayout>

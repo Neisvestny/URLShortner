@@ -20,23 +20,13 @@ export default function DonutChart({
 				viewBox={`0 0 ${size} ${size}`}
 				style={{ flexShrink: 0 }}
 			>
-				<circle
-					cx={cx}
-					cy={cy}
-					r={r}
-					fill="none"
-					stroke="var(--border)"
-					strokeWidth={10}
-				/>
+				<circle cx={cx} cy={cy} r={r} fill="none" stroke="var(--border)" strokeWidth={10} />
 				{data.map((d, i) => {
 					const dash = (d.n / total) * circ;
 
 					const offset = data
 						.slice(0, i)
-						.reduce(
-							(acc, curr) => acc + (curr.n / total) * circ,
-							0,
-						);
+						.reduce((acc, curr) => acc + (curr.n / total) * circ, 0);
 
 					return (
 						<circle

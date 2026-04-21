@@ -45,11 +45,7 @@ export default function StatsHeader({
 				Ваши ссылки
 			</h1>
 
-			<StatsSummary
-				totalLinks={totalLinks}
-				totalVisits={totalVisits}
-				topSlug={topSlug}
-			/>
+			<StatsSummary totalLinks={totalLinks} totalVisits={totalVisits} topSlug={topSlug} />
 
 			<StatsSearch query={query} setQuery={setQuery} />
 		</div>

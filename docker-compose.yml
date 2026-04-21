@@ -8,11 +8,7 @@ services:
       HOST: 0.0.0.0
       PORT: 3000
       JWT_SECRET: ${JWT_SECRET}
-      DB_HOST: ${DB_HOST}
-      DB_PORT: ${DB_PORT}
-      DB_USER: ${DB_USER}
-      DB_PASSWORD: ${DB_PASSWORD}
-      DB_NAME: ${DB_NAME}
+      DATABASE_URL: ${DATABASE_URL}
       LOG_LEVEL: ${LOG_LEVEL}
       LOG_PRETTY: ${LOG_PRETTY}
     restart: unless-stopped

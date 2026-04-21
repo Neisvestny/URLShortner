@@ -6,11 +6,7 @@ interface PaginationProps {
 	onPageChange: (page: number) => void;
 }
 
-export function Pagination({
-	page,
-	totalPages,
-	onPageChange,
-}: PaginationProps) {
+export function Pagination({ page, totalPages, onPageChange }: PaginationProps) {
 	const paginationButtonStyle = (disabled: boolean): React.CSSProperties => ({
 		width: 36,
 		height: 36,

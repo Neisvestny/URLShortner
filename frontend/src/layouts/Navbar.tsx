@@ -61,11 +61,7 @@ export default function Navbar({ isAuthenticated, user }: NavbarProps) {
 					}}
 				/>
 
-				{isAuthenticated ? (
-					<UserBadge username={user?.username} />
-				) : (
-					<LoginButton />
-				)}
+				{isAuthenticated ? <UserBadge username={user?.username} /> : <LoginButton />}
 			</div>
 		</nav>
 	);

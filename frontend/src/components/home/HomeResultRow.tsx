@@ -8,13 +8,7 @@ type ResultRowProps = {
 	muted?: boolean;
 };
 
-export default function ResultRow({
-	label,
-	value,
-	copied,
-	onCopy,
-	muted,
-}: ResultRowProps) {
+export default function ResultRow({ label, value, copied, onCopy, muted }: ResultRowProps) {
 	const [hovered, setHovered] = useState(false);
 	return (
 		<div>

@@ -28,9 +28,7 @@ const labelStyle: React.CSSProperties = {
 type Props = {
 	form: FormState;
 	isRegister: boolean;
-	onChange: (
-		field: keyof FormState,
-	) => (e: ChangeEvent<HTMLInputElement>) => void;
+	onChange: (field: keyof FormState) => (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export default function AuthForm({ form, isRegister, onChange }: Props) {
@@ -81,9 +79,7 @@ export default function AuthForm({ form, isRegister, onChange }: Props) {
 					style={{
 						...inputStyle,
 						borderColor:
-							focusedField === 'email'
-								? 'var(--border-hover)'
-								: 'var(--border)',
+							focusedField === 'email' ? 'var(--border-hover)' : 'var(--border)',
 					}}
 				/>
 			</div>
@@ -117,11 +113,7 @@ export default function AuthForm({ form, isRegister, onChange }: Props) {
 							cursor: 'pointer',
 						}}
 					>
-						{showPassword ? (
-							<EyeOff size={16} />
-						) : (
-							<Eye size={16} />
-						)}
+						{showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
 					</button>
 				</div>
 			</div>
@@ -137,9 +129,7 @@ export default function AuthForm({ form, isRegister, onChange }: Props) {
 								placeholder="••••••••"
 								value={form.confirmPassword}
 								onChange={onChange('confirmPassword')}
-								onFocus={() =>
-									setFocusedField('confirmPassword')
-								}
+								onFocus={() => setFocusedField('confirmPassword')}
 								onBlur={() => setFocusedField(null)}
 								style={{
 									...inputStyle,
@@ -152,9 +142,7 @@ export default function AuthForm({ form, isRegister, onChange }: Props) {
 							/>
 							<button
 								type="button"
-								onClick={() =>
-									setShowConfirmPassword((prev) => !prev)
-								}
+								onClick={() => setShowConfirmPassword((prev) => !prev)}
 								style={{
 									position: 'absolute',
 									right: 10,
@@ -166,11 +154,7 @@ export default function AuthForm({ form, isRegister, onChange }: Props) {
 									cursor: 'pointer',
 								}}
 							>
-								{showConfirmPassword ? (
-									<EyeOff size={16} />
-								) : (
-									<Eye size={16} />
-								)}
+								{showConfirmPassword ? <EyeOff size={16} /> : <Eye size={16} />}
 							</button>
 						</div>
 					</div>
@@ -190,8 +174,7 @@ export default function AuthForm({ form, isRegister, onChange }: Props) {
 										width: `${
 											passwordStrength.label === 'Слабый'
 												? 33
-												: passwordStrength.label ===
-													  'Средний'
+												: passwordStrength.label === 'Средний'
 													? 66
 													: 100
 										}%`,

@@ -60,11 +60,7 @@ export default function VisitsTable({
 						}}
 					>
 						<thead>
-							<TableHeader
-								sortKey={sortKey}
-								sortAsc={sortAsc}
-								onSort={toggleSort}
-							/>
+							<TableHeader sortKey={sortKey} sortAsc={sortAsc} onSort={toggleSort} />
 						</thead>
 						<tbody>
 							{paginatedData.length === 0 ? (
@@ -94,11 +90,7 @@ export default function VisitsTable({
 						</tbody>
 					</table>
 				</div>
-				<Pagination
-					page={page}
-					totalPages={totalPages}
-					onPageChange={handlePageChange}
-				/>
+				<Pagination page={page} totalPages={totalPages} onPageChange={handlePageChange} />
 			</div>
 			<StatsFooter
 				filteredLength={(page - 1) * PAGE_SIZE + paginatedData.length}

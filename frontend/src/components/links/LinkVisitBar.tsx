@@ -1,10 +1,4 @@
-export default function VisitBar({
-	visits,
-	max,
-}: {
-	visits: number;
-	max: number;
-}) {
+export default function VisitBar({ visits, max }: { visits: number; max: number }) {
 	const pct = Math.round((visits / max) * 100);
 	return (
 		<div

@@ -23,15 +23,11 @@ export default function RedirectHandler() {
 				if (!exists) {
 					setNotFound(true);
 				} else {
-					window.location.replace(
-						`${import.meta.env.VITE_API_URL}/r/${code}`,
-					);
+					window.location.replace(`${import.meta.env.VITE_API_URL}/r/${code}`);
 				}
 			} catch {
 				// если API умер — просто редиректим (fallback)
-				window.location.replace(
-					`${import.meta.env.VITE_API_URL}/r/${code}`,
-				);
+				window.location.replace(`${import.meta.env.VITE_API_URL}/r/${code}`);
 			}
 		};
 

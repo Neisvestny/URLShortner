@@ -12,12 +12,7 @@ export default function LogoIcon() {
 				justifyContent: 'center',
 			}}
 		>
-			<svg
-				width="13"
-				height="13"
-				viewBox="0 0 13 13"
-				fill="var(--logo-fg)"
-			>
+			<svg width="13" height="13" viewBox="0 0 13 13" fill="var(--logo-fg)">
 				<path d="M2 11L6.5 2L11 11H2Z" />
 			</svg>
 		</div>

@@ -5,8 +5,7 @@ import { api } from './axios';
 export const linksApi = {
 	getMyLinks: () => api.get<{ links: Link[] }>('/links'),
 
-	createLink: (original_url: string) =>
-		api.post<{ link: Link }>('/links', { original_url }),
+	createLink: (original_url: string) => api.post<{ link: Link }>('/links', { original_url }),
 
 	getLinkStats: (slug: string) =>
 		api.get<{ link: Link; visits: Visit[] }>(`/links/${slug}/stats`),

@@ -1,12 +1,7 @@
 import { logger } from '@/lib/logger';
 import { NextFunction, Request, Response } from 'express';
 
-export const errorHandler = (
-	err: any,
-	req: Request,
-	res: Response,
-	next: NextFunction,
-) => {
+export const errorHandler = (err: any, req: Request, res: Response, next: NextFunction) => {
 	const status = err.statusCode || 500;
 
 	if (status >= 500) {

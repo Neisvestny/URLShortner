@@ -14,18 +14,11 @@ export function VisitRow({ visit, index, totalRows }: VisitRowProps) {
 		<tr
 			key={visit.id}
 			style={{
-				borderBottom:
-					index < totalRows - 1
-						? '0.5px solid var(--border)'
-						: 'none',
+				borderBottom: index < totalRows - 1 ? '0.5px solid var(--border)' : 'none',
 				transition: 'background 0.12s',
 			}}
-			onMouseEnter={(e) =>
-				(e.currentTarget.style.background = 'var(--surface)')
-			}
-			onMouseLeave={(e) =>
-				(e.currentTarget.style.background = 'transparent')
-			}
+			onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--surface)')}
+			onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
 		>
 			<td
 				style={{
@@ -65,8 +58,7 @@ export function VisitRow({ visit, index, totalRows }: VisitRowProps) {
 							width: 7,
 							height: 7,
 							borderRadius: 99,
-							background:
-								BROWSER_COLORS[visit.browser ?? ''] ?? '#444',
+							background: BROWSER_COLORS[visit.browser ?? ''] ?? '#444',
 							flexShrink: 0,
 						}}
 					/>

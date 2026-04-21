@@ -46,15 +46,10 @@ export default function LinkStatsPage({ code }: Props) {
 			.sort((a, b) => {
 				let cmp = 0;
 				if (sortKey === 'date')
-					cmp =
-						new Date(a.visited_at).getTime() -
-						new Date(b.visited_at).getTime();
-				if (sortKey === 'region')
-					cmp = (a.region ?? '').localeCompare(b.region ?? '');
-				if (sortKey === 'browser')
-					cmp = (a.browser ?? '').localeCompare(b.browser ?? '');
-				if (sortKey === 'os')
-					cmp = (a.os ?? '').localeCompare(b.os ?? '');
+					cmp = new Date(a.visited_at).getTime() - new Date(b.visited_at).getTime();
+				if (sortKey === 'region') cmp = (a.region ?? '').localeCompare(b.region ?? '');
+				if (sortKey === 'browser') cmp = (a.browser ?? '').localeCompare(b.browser ?? '');
+				if (sortKey === 'os') cmp = (a.os ?? '').localeCompare(b.os ?? '');
 				return sortAsc ? cmp : -cmp;
 			});
 	}, [search, sortKey, sortAsc, visits]);
@@ -64,9 +59,7 @@ export default function LinkStatsPage({ code }: Props) {
 	if (isLoading) {
 		return (
 			<MainLayout>
-				<div style={{ color: 'var(--muted)', padding: '40px 0' }}>
-					Загрузка...
-				</div>
+				<div style={{ color: 'var(--muted)', padding: '40px 0' }}>Загрузка...</div>
 			</MainLayout>
 		);
 	}
@@ -88,11 +81,7 @@ export default function LinkStatsPage({ code }: Props) {
 
 	return (
 		<MainLayout>
-			<StatsHeader
-				code={code}
-				total={visits.length}
-				originalUrl={link?.original_url}
-			/>
+			<StatsHeader code={code} total={visits.length} originalUrl={link?.original_url} />
 
 			<div
 				style={{

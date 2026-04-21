@@ -44,13 +44,8 @@ export default function SearchInput({ value, onChange }: Props) {
 					transition: 'border-color 0.15s',
 					fontFamily: 'inherit',
 				}}
-				onFocus={(e) =>
-					(e.currentTarget.style.borderColor =
-						'rgba(180,140,255,0.4)')
-				}
-				onBlur={(e) =>
-					(e.currentTarget.style.borderColor = 'var(--border)')
-				}
+				onFocus={(e) => (e.currentTarget.style.borderColor = 'rgba(180,140,255,0.4)')}
+				onBlur={(e) => (e.currentTarget.style.borderColor = 'var(--border)')}
 			/>
 			{value && (
 				<button
