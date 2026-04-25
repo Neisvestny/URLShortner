@@ -31,9 +31,9 @@ export const createLink = async (req: Request, res: Response) => {
 	res.status(StatusCodes.CREATED).json({ link });
 };
 
-export const getLinkStats = async (req: Request, res: Response) => {
+export const getLinkStats = async (req: Request<{ slug: string }>, res: Response) => {
+	const slug = req.params.slug;
 	const { userId } = extractTokenPayload(req);
-	const slug = req.params['slug'];
 
 	validateSlug(slug);
 
@@ -47,8 +47,8 @@ export const getLinkStats = async (req: Request, res: Response) => {
 	res.json(formattedStats);
 };
 
-export const checkLinkExists = async (req: Request, res: Response) => {
-	const slug = req.params['slug'];
+export const checkLinkExists = async (req: Request<{ slug: string }>, res: Response) => {
+	const slug = req.params.slug;
 
 	validateSlugFormat(slug);
 

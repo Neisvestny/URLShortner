@@ -1,8 +1,7 @@
+import path from 'path';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
-import 'express-async-errors';
-import path from 'path';
 import { StatusCodes } from 'http-status-codes';
 import { env } from './config/env';
 import { errorHandler } from './middlewares/error.middleware';
@@ -27,7 +26,7 @@ app.use('/api', routes);
 
 if (env.IS_PROD) {
 	app.use(express.static(path.join(__dirname, '../public')));
-	app.get('*', (_req, res) => {
+	app.use((_req, res) => {
 		res.sendFile(path.join(__dirname, '../public', 'index.html'));
 	});
 } else {

@@ -1,8 +1,8 @@
 import { prisma } from '@/lib/prisma';
 import { AppError } from '@/utils/AppError';
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import bcrypt from 'bcrypt';
 import { StatusCodes } from 'http-status-codes';
+import { PrismaClientKnownRequestError } from './../../generated/prisma/runtime/client';
 
 export const findUserByEmail = async (email: string) => {
 	return prisma.user.findUnique({

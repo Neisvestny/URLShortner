@@ -1,5 +1,5 @@
 # ── Stage 1: сборка фронтенда ──────────────────────────────
-FROM node:20-alpine AS frontend-builder
+FROM node:22-alpine AS frontend-builder
 
 WORKDIR /app/frontend
 COPY frontend/package*.json ./
@@ -8,7 +8,7 @@ COPY frontend/ ./
 RUN npm run build
 
 # ── Stage 2: сборка бэкенда ────────────────────────────────
-FROM node:20-alpine AS backend-builder
+FROM node:22-alpine AS backend-builder
 
 WORKDIR /app/backend
 
@@ -21,7 +21,7 @@ RUN npx prisma generate
 RUN npm run build
 
 # ── Stage 3: prod runner ───────────────────────────────────
-FROM node:20-alpine AS runner
+FROM node:22-alpine AS runner
 
 WORKDIR /app
 

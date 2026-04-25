@@ -1,6 +1,7 @@
-import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
 import { nanoid } from 'nanoid';
+import { PrismaClient } from '../generated/prisma/client';
+import { logger } from '../src/lib/logger';
 
 const prisma = new PrismaClient();
 
@@ -12,14 +13,14 @@ function randomItem<T>(arr: T[]): T {
 }
 
 async function main() {
-	console.log('🌱 Seeding database...');
+	logger.info('🌱 Seeding database...');
 
-	// Очищаем существующие данные
+	// Очистка
 	await prisma.visit.deleteMany();
 	await prisma.link.deleteMany();
 	await prisma.user.deleteMany();
 
-	// Создаем пользователей
+	// Пользователи
 	const users = await Promise.all([
 		prisma.user.create({
 			data: {
@@ -37,9 +38,9 @@ async function main() {
 		}),
 	]);
 
-	console.log(`✅ Created ${users.length} users`);
+	logger.info({ count: users.length }, 'Users created');
 
-	// Создаем ссылки для каждого пользователя
+	// Ссылки
 	const linksData = [
 		{ original_url: 'https://github.com' },
 		{ original_url: 'https://stackoverflow.com' },
@@ -49,6 +50,7 @@ async function main() {
 	];
 
 	const links = [];
+
 	for (const user of users) {
 		for (const linkData of linksData.slice(0, 3)) {
 			const link = await prisma.link.create({
@@ -62,18 +64,20 @@ async function main() {
 		}
 	}
 
-	console.log(`✅ Created ${links.length} links`);
+	logger.info({ count: links.length }, 'Links created');
 
-	// Создаем визиты для ссылок
+	// Визиты
 	const browsers = ['Chrome', 'Firefox', 'Safari', 'Edge'];
 	const oss = ['Windows', 'macOS', 'Linux', 'iOS', 'Android'];
 	const countries = ['US', 'GB', 'DE', 'FR', 'CA', 'AU', 'JP', 'BR'];
 
+	let totalVisits = 0;
+
 	for (const link of links) {
-		const visitsCount = Math.floor(Math.random() * 50) + 5; // 5-55 визитов
+		const visitsCount = Math.floor(Math.random() * 50) + 5;
 
 		for (let i = 0; i < visitsCount; i++) {
-			const daysAgo = Math.floor(Math.random() * 30); // последние 30 дней
+			const daysAgo = Math.floor(Math.random() * 30);
 			const visitedAt = new Date();
 			visitedAt.setDate(visitedAt.getDate() - daysAgo);
 
@@ -89,12 +93,14 @@ async function main() {
 					visited_at: visitedAt,
 				},
 			});
+
+			totalVisits++;
 		}
 	}
 
-	console.log(`✅ Created visits for all links`);
+	logger.info({ count: totalVisits }, 'Visits created');
 
-	// Создаем публичные ссылки (без привязки к пользователю)
+	// Публичные ссылки
 	const publicLinks = await Promise.all([
 		prisma.link.create({
 			data: {
@@ -112,14 +118,14 @@ async function main() {
 		}),
 	]);
 
-	console.log(`✅ Created ${publicLinks.length} public links`);
+	logger.info({ count: publicLinks.length }, 'Public links created');
 
-	console.log('🎉 Seeding completed!');
+	logger.info('🎉 Seeding completed!');
 }
 
 main()
 	.catch((e) => {
-		console.error('❌ Seeding failed:', e);
+		logger.error({ err: e }, 'Seeding failed');
 		process.exit(1);
 	})
 	.finally(async () => {
