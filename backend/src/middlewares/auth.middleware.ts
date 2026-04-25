@@ -3,18 +3,6 @@ import { AppError } from '@/utils/AppError';
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-declare global {
-	namespace Express {
-		interface Request {
-			user?: {
-				id: number;
-				username: string;
-				email: string;
-			};
-		}
-	}
-}
-
 export const authMiddleware = async (req: Request, _res: Response, next: NextFunction) => {
 	try {
 		const token = req.cookies?.['token'];

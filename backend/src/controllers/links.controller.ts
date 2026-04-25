@@ -1,4 +1,3 @@
-// controllers/links.controller.ts
 import {
 	validateOriginalUrl,
 	validateSlug,
@@ -24,11 +23,11 @@ export const getUserLinks = async (req: Request, res: Response) => {
 
 export const createLink = async (req: Request, res: Response) => {
 	const userId = getOptionalUserId(req);
-	const { original_url } = req.body as { original_url?: string };
+	const original_url: string | undefined = req.body?.original_url;
 
 	validateOriginalUrl(original_url);
 
-	const link = await createLinkRecord(original_url!, userId);
+	const link = await createLinkRecord(original_url, userId);
 	res.status(StatusCodes.CREATED).json({ link });
 };
 

@@ -1,7 +1,7 @@
 import { AppError } from '@/utils/AppError';
 import { StatusCodes } from 'http-status-codes';
-import { signToken, TokenPayload } from './token.service';
-import { findUserByEmail, verifyPassword } from './user.service';
+import { signToken, TokenPayload, verifyToken } from './token.service';
+import { findUserByEmail, findUserById, verifyPassword } from './user.service';
 
 export const authenticateUser = async (email: string, password: string) => {
 	const user = await findUserByEmail(email);
@@ -37,9 +37,6 @@ export const authenticateUser = async (email: string, password: string) => {
 };
 
 export const validateTokenAndGetUser = async (token: string) => {
-	const { verifyToken } = await import('./token.service');
-	const { findUserById } = await import('./user.service');
-
 	let payload: TokenPayload;
 
 	try {

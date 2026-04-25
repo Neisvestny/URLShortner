@@ -44,6 +44,7 @@ export const createUser = async (username: string, email: string, password: stri
 			},
 		});
 	} catch (error) {
+		// P2002 - Prisma unique constraint violation
 		if (error instanceof PrismaClientKnownRequestError && error.code === 'P2002') {
 			const target = error.meta?.['target'] as string[] | undefined;
 

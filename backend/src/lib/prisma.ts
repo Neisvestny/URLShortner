@@ -8,11 +8,11 @@ const globalForPrisma = globalThis as unknown as {
 
 export const prisma = new PrismaClient();
 
-if (env.NODE_ENV !== 'production') {
+if (!env.IS_PROD) {
 	globalForPrisma.prisma = prisma;
 }
 
-if (env.NODE_ENV === 'development') {
+if (!env.IS_PROD) {
 	prisma.$on('query' as never, (e: any) => {
 		logger.debug(
 			{

@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { env } from '@/config/env';
 import { connectDB } from '@/db';
 import { logger } from '@/lib/logger';
@@ -11,7 +12,7 @@ async function startServer() {
 	await connectDB();
 
 	const server = app.listen(env.PORT, () => {
-		if (env.NODE_ENV === 'development') {
+		if (!env.IS_PROD) {
 			logger.info(`Server started on http://${env.HOST}:${env.PORT}`);
 			logger.info(`Prisma Studio: npx prisma studio`);
 		} else {

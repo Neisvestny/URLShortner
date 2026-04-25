@@ -1,22 +1,21 @@
 import { env } from '@/config/env';
 import jwt from 'jsonwebtoken';
+import { type StringValue } from 'ms';
 
 export type TokenPayload = {
 	userId: number;
 };
 
-const isProd = env.NODE_ENV === 'production';
-
 export const COOKIE_OPTIONS = {
 	httpOnly: true,
-	secure: isProd,
+	secure: env.IS_PROD,
 	sameSite: 'lax' as const,
 	maxAge: 7 * 24 * 60 * 60 * 1000,
 };
 
 export const signToken = (payload: TokenPayload): string => {
 	return jwt.sign(payload, env.JWT_SECRET, {
-		expiresIn: '7d',
+		expiresIn: env.JWT_EXPIRES_IN as StringValue,
 	});
 };
 

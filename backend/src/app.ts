@@ -25,7 +25,7 @@ app.use(requestLogger);
 
 app.use('/api', routes);
 
-if (env.NODE_ENV === 'production') {
+if (env.IS_PROD) {
 	app.use(express.static(path.join(__dirname, '../public')));
 	app.get('*', (_req, res) => {
 		res.sendFile(path.join(__dirname, '../public', 'index.html'));

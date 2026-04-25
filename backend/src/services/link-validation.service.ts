@@ -1,8 +1,9 @@
-// services/link-validation.service.ts
 import { AppError } from '@/utils/AppError';
 import { StatusCodes } from 'http-status-codes';
 
-export const validateOriginalUrl = (original_url?: string) => {
+export const validateOriginalUrl: (original_url?: string) => asserts original_url is string = (
+	original_url,
+) => {
 	if (!original_url) {
 		throw new AppError(StatusCodes.BAD_REQUEST, 'MISSING_URL', 'original_url is required');
 	}
