@@ -12,21 +12,16 @@ type CopiedState = Record<CopyKey, boolean>;
 
 export default function ShortenForm() {
 	const [url, setUrl] = useState('');
-	const [copied, setCopied] = useState<CopiedState>({
-		short: false,
-		stats: false,
-	});
+	const [copied, setCopied] = useState<CopiedState>({ short: false, stats: false });
 	const { loading, error, result, shorten, setError } = useShortener();
 	const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
 	function handleShorten() {
 		const trimmed = url.trim();
-
 		if (!isValidUrl(trimmed)) {
 			setError('Введите корректный URL');
 			return;
 		}
-
 		shorten(trimmed);
 	}
 
@@ -34,25 +29,13 @@ export default function ShortenForm() {
 		const success = await copyToClipboard(text);
 		if (!success) return;
 		setCopied((prev) => ({ ...prev, [key]: true }));
-		setTimeout(() => {
-			setCopied((prev) => ({ ...prev, [key]: false }));
-		}, 2000);
+		setTimeout(() => setCopied((prev) => ({ ...prev, [key]: false })), 2000);
 	}
 
 	return (
 		<div
-			style={{
-				width: '100%',
-				maxWidth: 800,
-				background: 'var(--surface)',
-				border: `0.5px solid ${result ? 'var(--border-hover)' : 'var(--border)'}`,
-				borderRadius: 16,
-				padding: 24,
-				transition: 'border-color 0.2s, background 0.2s',
-				margin: '0 auto',
-			}}
+			className={`w-full max-w-2xl bg-surface border rounded-2xl p-6 transition-colors mx-auto ${result ? 'border-border-hover' : 'border-border'}`}
 		>
-			{/* Input row */}
 			<UrlInput
 				value={url}
 				error={!!error}
@@ -64,20 +47,8 @@ export default function ShortenForm() {
 				onSubmit={handleShorten}
 			/>
 
-			{/* Ошибка */}
-			{error && (
-				<p
-					style={{
-						fontSize: 12,
-						color: 'var(--color-text-danger, #ff4444)',
-						margin: '0',
-					}}
-				>
-					{error}
-				</p>
-			)}
+			{error && <p className="text-xs text-danger m-0 mt-1">{error}</p>}
 
-			{/* Результат */}
 			{result && (
 				<ResultList
 					result={result}
@@ -86,17 +57,6 @@ export default function ShortenForm() {
 					showStats={isAuthenticated}
 				/>
 			)}
-
-			<style>{`
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to   { opacity: 1; transform: none; }
-        }
-        @keyframes bounce {
-            0%, 80%, 100% { transform: translateY(0); opacity: 0.5; }
-            40%            { transform: translateY(-3px); opacity: 1; }
-        }
-        `}</style>
 		</div>
 	);
 }

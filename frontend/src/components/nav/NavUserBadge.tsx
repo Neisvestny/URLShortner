@@ -5,11 +5,9 @@ import { authApi } from '../../api/authApi';
 import { clearUser } from '../../features/auth/authSlice';
 import { useAppDispatch } from '../../hooks/storeHooks';
 
-type UserBadgeProps = {
-	username?: string;
-};
+type Props = { username?: string };
 
-export default function UserBadge({ username }: UserBadgeProps) {
+export default function UserBadge({ username }: Props) {
 	const [open, setOpen] = useState(false);
 	const ref = useRef<HTMLDivElement>(null);
 	const dispatch = useAppDispatch();
@@ -17,12 +15,9 @@ export default function UserBadge({ username }: UserBadgeProps) {
 
 	const initials = username ? username.slice(0, 2).toUpperCase() : '??';
 
-	// Закрываем при клике вне
 	useEffect(() => {
 		function handleClickOutside(e: MouseEvent) {
-			if (ref.current && !ref.current.contains(e.target as Node)) {
-				setOpen(false);
-			}
+			if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
 		}
 		document.addEventListener('mousedown', handleClickOutside);
 		return () => document.removeEventListener('mousedown', handleClickOutside);
@@ -42,109 +37,39 @@ export default function UserBadge({ username }: UserBadgeProps) {
 				setOpen(false);
 			},
 		},
-		{
-			label: 'Выйти',
-			onClick: handleLogout,
-			danger: true,
-		},
+		{ label: 'Выйти', onClick: handleLogout, danger: true },
 	];
 
 	return (
-		<div ref={ref} style={{ position: 'relative' }}>
+		<div ref={ref} className="relative">
 			<div
 				onClick={() => setOpen((v) => !v)}
-				style={{
-					display: 'flex',
-					alignItems: 'center',
-					gap: 8,
-					padding: '3px 8px 3px 3px',
-					border: `0.5px solid ${open ? 'var(--border-hover)' : 'var(--border)'}`,
-					borderRadius: 100,
-					cursor: 'pointer',
-					transition: 'border-color 0.15s',
-					userSelect: 'none',
-				}}
+				className={`flex items-center gap-2 py-0.5 pr-2 pl-0.5 border rounded-full cursor-pointer transition-colors select-none ${
+					open ? 'border-border-hover' : 'border-border'
+				}`}
 			>
-				<div
-					style={{
-						width: 26,
-						height: 26,
-						borderRadius: '50%',
-						background: 'var(--surface)',
-						display: 'flex',
-						alignItems: 'center',
-						justifyContent: 'center',
-						fontSize: 10,
-						fontWeight: 500,
-						color: 'var(--fg)',
-						letterSpacing: '0.3px',
-						flexShrink: 0,
-					}}
-				>
+				<div className="size-[26px] rounded-full bg-surface flex items-center justify-center text-[10px] font-medium text-fg tracking-wide shrink-0">
 					{initials}
 				</div>
-				<span
-					style={{
-						fontSize: 13,
-						color: 'var(--fg)',
-						fontWeight: 450,
-					}}
-				>
-					{username}
-				</span>
+				<span className="text-sm text-fg font-medium">{username}</span>
 				<ChevronDown
 					size={12}
 					strokeWidth={2}
-					style={{
-						color: 'var(--muted)',
-						transition: 'transform 0.15s',
-						transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
-					}}
+					className={`text-muted transition-transform duration-150 ${open ? 'rotate-180' : 'rotate-0'}`}
 				/>
 			</div>
 
 			{open && (
-				<div
-					style={{
-						position: 'absolute',
-						top: 'calc(100% + 8px)',
-						right: 0,
-						minWidth: 160,
-						background: 'var(--surface)',
-						border: '0.5px solid var(--border)',
-						borderRadius: 10,
-						padding: 4,
-						zIndex: 100,
-						boxShadow: '0 8px 24px rgba(0,0,0,0.15)',
-					}}
-				>
-					{/* кнопки без изменений, только цвета через переменные */}
+				<div className="absolute top-[calc(100%+8px)] right-0 min-w-40 bg-surface border border-border rounded-lg p-1 z-50 shadow-lg">
 					{menuItems.map(({ label, onClick, danger }) => (
 						<button
 							key={label}
 							onClick={onClick}
-							style={{
-								display: 'block',
-								width: '100%',
-								padding: '8px 12px',
-								background: 'none',
-								border: 'none',
-								borderRadius: 7,
-								textAlign: 'left',
-								fontSize: 13,
-								fontFamily: 'inherit',
-								color: danger ? 'var(--color-text-danger)' : 'var(--fg)',
-								cursor: 'pointer',
-								transition: 'background 0.1s',
-							}}
-							onMouseEnter={(e) => {
-								e.currentTarget.style.background = danger
-									? 'var(--color-background-danger)'
-									: 'var(--surface-hover)';
-							}}
-							onMouseLeave={(e) => {
-								e.currentTarget.style.background = 'none';
-							}}
+							className={`block w-full px-3 py-2 bg-transparent border-none rounded-md text-left text-sm font-sans cursor-pointer transition-colors ${
+								danger
+									? 'text-danger hover:bg-danger-bg'
+									: 'text-fg hover:bg-surface-hover'
+							}`}
 						>
 							{label}
 						</button>

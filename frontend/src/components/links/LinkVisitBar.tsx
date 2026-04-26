@@ -1,23 +1,11 @@
-export default function VisitBar({ visits, max }: { visits: number; max: number }) {
-	const pct = Math.round((visits / max) * 100);
+type Props = { visits: number; max: number };
+
+export default function VisitBar({ visits, max }: Props) {
 	return (
-		<div
-			style={{
-				height: 3,
-				borderRadius: 99,
-				background: 'var(--border)',
-				overflow: 'hidden',
-				marginTop: 12,
-			}}
-		>
+		<div className="h-[3px] rounded-full bg-border overflow-hidden mt-3">
 			<div
-				style={{
-					height: '100%',
-					width: `${pct}%`,
-					borderRadius: 99,
-					background: 'linear-gradient(90deg, #7c7cff, #b48cff)',
-					transition: 'width 0.6s cubic-bezier(.4,0,.2,1)',
-				}}
+				className="h-full rounded-full bg-gradient-to-r from-accent-dim to-accent transition-[width] duration-500"
+				style={{ width: `${Math.round((visits / max) * 100)}%` }}
 			/>
 		</div>
 	);

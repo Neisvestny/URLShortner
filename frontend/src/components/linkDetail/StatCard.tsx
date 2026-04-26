@@ -1,35 +1,16 @@
-export default function StatCard({
-	title,
-	children,
-	style,
-}: {
+type Props = {
 	title: string;
 	children: React.ReactNode;
 	style?: React.CSSProperties;
-}) {
+};
+
+export default function StatCard({ title, children, style }: Props) {
 	return (
 		<div
-			style={{
-				padding: '20px 22px',
-				borderRadius: 14,
-				background: 'var(--surface)',
-				border: '0.5px solid var(--border)',
-				flex: 1,
-				minWidth: 0,
-				...style,
-			}}
+			className="p-5 rounded-card bg-surface border border-border flex-1 min-w-0"
+			style={style}
 		>
-			<p
-				style={{
-					margin: '0 0 16px',
-					fontSize: 11,
-					color: 'var(--muted)',
-					textTransform: 'uppercase',
-					letterSpacing: '0.06em',
-				}}
-			>
-				{title}
-			</p>
+			<p className="m-0 mb-4 text-xs text-muted uppercase tracking-wider">{title}</p>
 			{children}
 		</div>
 	);

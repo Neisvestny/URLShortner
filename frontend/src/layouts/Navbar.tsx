@@ -5,62 +5,21 @@ import NavThemeButton from '../components/nav/NavThemeButton';
 import UserBadge from '../components/nav/NavUserBadge';
 import type { User } from '../types/user';
 
-type NavbarProps = {
-	isAuthenticated: boolean;
-	user?: User | null;
-};
+type Props = { isAuthenticated: boolean; user?: User | null };
 
-export default function Navbar({ isAuthenticated, user }: NavbarProps) {
+export default function Navbar({ isAuthenticated, user }: Props) {
 	return (
-		<nav
-			style={{
-				display: 'flex',
-				alignItems: 'center',
-				justifyContent: 'space-between',
-				padding: '0 32px',
-				height: 56,
-				borderBottom: '0.5px solid var(--border)',
-				position: 'sticky',
-				top: 0,
-				background: 'color-mix(in srgb, var(--bg) 85%, transparent)',
-				backdropFilter: 'blur(12px)',
-				WebkitBackdropFilter: 'blur(12px)',
-				zIndex: 10,
-				transition: 'background 0.2s, border-color 0.2s',
-			}}
-		>
-			{/* Логотип */}
+		<nav className="flex items-center justify-between px-8 h-14 border-b border-border sticky top-0 bg-[color-mix(in_srgb,var(--bg)_85%,transparent)] backdrop-blur-md z-10 transition-colors">
 			<Link
 				to="/"
-				style={{
-					display: 'flex',
-					alignItems: 'center',
-					gap: 8,
-					fontSize: 15,
-					fontWeight: 500,
-					letterSpacing: '-0.3px',
-					textDecoration: 'none',
-					color: 'inherit',
-				}}
+				className="flex items-center gap-2 text-sm font-medium no-underline text-fg"
 			>
 				<LogoIcon />
 				URL Shortner
 			</Link>
-
-			{/* Ссылки */}
-			<div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+			<div className="flex items-center gap-1.5">
 				<NavThemeButton />
-
-				{/* разделитель */}
-				<div
-					style={{
-						width: '0.5px',
-						height: 18,
-						background: 'var(--border)',
-						flexShrink: 0,
-					}}
-				/>
-
+				<div className="w-px h-4 bg-border shrink-0" />
 				{isAuthenticated ? <UserBadge username={user?.username} /> : <LoginButton />}
 			</div>
 		</nav>

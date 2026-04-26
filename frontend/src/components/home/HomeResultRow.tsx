@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-type ResultRowProps = {
+type Props = {
 	label: string;
 	value: string;
 	copied: boolean;
@@ -8,36 +8,16 @@ type ResultRowProps = {
 	muted?: boolean;
 };
 
-export default function ResultRow({ label, value, copied, onCopy, muted }: ResultRowProps) {
+export default function ResultRow({ label, value, copied, onCopy, muted }: Props) {
 	const [hovered, setHovered] = useState(false);
+
 	return (
 		<div>
-			<p
-				style={{
-					fontSize: 11,
-					textTransform: 'uppercase',
-					letterSpacing: '0.7px',
-					color: 'var(--muted)',
-					marginBottom: 6,
-				}}
-			>
-				{label}
-			</p>
-			<div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+			<p className="text-xs uppercase tracking-wider text-muted mb-1.5">{label}</p>
+			<div className="flex gap-2 items-center">
 				<div
-					style={{
-						flex: 1,
-						background: 'var(--bg)',
-						border: '0.5px solid var(--border)',
-						borderRadius: 8,
-						padding: '9px 12px',
-						fontSize: 13,
-						color: muted ? 'var(--muted)' : 'var(--fg)',
-						fontFamily: "'SF Mono', 'Fira Code', monospace",
-						overflow: 'hidden',
-						textOverflow: 'ellipsis',
-						whiteSpace: 'nowrap',
-					}}
+					className="flex-1 bg-bg border border-border rounded-lg px-3 py-2.5 text-sm font-mono overflow-hidden text-ellipsis whitespace-nowrap text-fg opacity-90"
+					style={{ color: muted ? 'var(--muted)' : undefined }}
 				>
 					{value}
 				</div>
@@ -45,29 +25,13 @@ export default function ResultRow({ label, value, copied, onCopy, muted }: Resul
 					onClick={onCopy}
 					onMouseEnter={() => setHovered(true)}
 					onMouseLeave={() => setHovered(false)}
-					style={{
-						background: copied
-							? 'rgba(34,197,94,0.06)'
+					className={`px-3.5 py-2.5 rounded-lg text-sm font-sans whitespace-nowrap shrink-0 border transition-all cursor-pointer ${
+						copied
+							? 'bg-green-500/5 border-green-500/25 text-green-500'
 							: hovered
-								? 'var(--surface-hover)'
-								: 'var(--surface)',
-						border: `0.5px solid ${
-							copied
-								? 'rgba(34,197,94,0.25)'
-								: hovered
-									? 'var(--border-hover)'
-									: 'var(--border)'
-						}`,
-						borderRadius: 8,
-						padding: '9px 14px',
-						fontSize: 13,
-						color: copied ? '#22c55e' : 'var(--fg)',
-						cursor: 'pointer',
-						fontFamily: 'inherit',
-						whiteSpace: 'nowrap',
-						flexShrink: 0,
-						transition: 'all 0.15s',
-					}}
+								? 'bg-surface-hover border-border-hover text-fg'
+								: 'bg-surface border-border text-fg'
+					}`}
 				>
 					{copied ? 'Скопировано!' : 'Копировать'}
 				</button>

@@ -1,29 +1,11 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function LoginButton() {
-	const [hovered, setHovered] = useState(false);
 	const navigate = useNavigate();
-
 	return (
 		<button
 			onClick={() => navigate('/login')}
-			onMouseEnter={() => setHovered(true)}
-			onMouseLeave={() => setHovered(false)}
-			style={{
-				fontSize: 13,
-				height: 32,
-				padding: '0 14px',
-				color: 'var(--fg)',
-				background: hovered ? 'var(--surface-hover)' : 'var(--surface)',
-				border: `0.5px solid ${hovered ? 'var(--border-hover)' : 'var(--border)'}`,
-				borderRadius: 7,
-				cursor: 'pointer',
-				transition: 'all 0.15s',
-				fontFamily: 'inherit',
-				fontWeight: 450,
-				letterSpacing: '-0.1px',
-			}}
+			className="text-sm h-8 px-3.5 text-fg bg-surface border border-border rounded-md cursor-pointer transition-all font-sans font-medium hover:bg-surface-hover hover:border-border-hover"
 		>
 			Войти
 		</button>

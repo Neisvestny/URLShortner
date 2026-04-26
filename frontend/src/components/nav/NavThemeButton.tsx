@@ -11,29 +11,7 @@ export default function NavThemeButton() {
 		<button
 			onClick={() => dispatch(toggleTheme())}
 			title={theme === 'dark' ? 'Светлая тема' : 'Тёмная тема'}
-			style={{
-				width: 32,
-				height: 32,
-				display: 'flex',
-				alignItems: 'center',
-				justifyContent: 'center',
-				background: 'none',
-				border: '0.5px solid var(--border)',
-				borderRadius: 7,
-				color: 'var(--muted)',
-				cursor: 'pointer',
-				flexShrink: 0,
-				transition: 'border-color 0.15s, color 0.15s',
-				fontFamily: 'inherit',
-			}}
-			onMouseEnter={(e) => {
-				e.currentTarget.style.borderColor = 'var(--border-hover)';
-				e.currentTarget.style.color = 'var(--fg)';
-			}}
-			onMouseLeave={(e) => {
-				e.currentTarget.style.borderColor = 'var(--border)';
-				e.currentTarget.style.color = 'var(--muted)';
-			}}
+			className="size-8 flex items-center justify-center bg-transparent border border-border rounded-md text-muted cursor-pointer transition-colors hover:border-border-hover hover:text-fg"
 		>
 			{theme === 'dark' ? (
 				<Sun size={15} strokeWidth={1.8} />

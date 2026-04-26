@@ -15,14 +15,13 @@ import count from '../utils/count';
 
 type SortKey = 'date' | 'region' | 'browser' | 'os';
 
-interface Props {
+type Props = {
 	code: string;
-}
+};
 
 export default function LinkStatsPage({ code }: Props) {
 	const isAuthenticated = useAppSelector(selectIsAuthenticated);
 	const { link, visits, isLoading, error } = useLinkStats(code);
-
 	const [search, setSearch] = useState('');
 	const [sortKey, setSortKey] = useState<SortKey>('date');
 	const [sortAsc, setSortAsc] = useState(false);
@@ -56,41 +55,24 @@ export default function LinkStatsPage({ code }: Props) {
 
 	if (!isAuthenticated) return <Navigate to="/" replace />;
 
-	if (isLoading) {
+	if (isLoading)
 		return (
 			<MainLayout>
-				<div style={{ color: 'var(--muted)', padding: '40px 0' }}>Загрузка...</div>
+				<div className="text-muted py-10">Загрузка...</div>
 			</MainLayout>
 		);
-	}
-
-	if (error) {
+	if (error)
 		return (
 			<MainLayout>
-				<div
-					style={{
-						color: 'var(--color-text-danger)',
-						padding: '40px 0',
-					}}
-				>
-					{error}
-				</div>
+				<div className="text-danger py-10">{error}</div>
 			</MainLayout>
 		);
-	}
 
 	return (
 		<MainLayout>
 			<StatsHeader code={code} total={visits.length} originalUrl={link?.original_url} />
 
-			<div
-				style={{
-					display: 'flex',
-					gap: 12,
-					marginBottom: 12,
-					flexWrap: 'wrap',
-				}}
-			>
+			<div className="flex gap-3 mb-3 flex-wrap">
 				<StatCard title="Браузеры" style={{ flex: 1, minWidth: 260 }}>
 					<DonutChart data={browsers} colors={BROWSER_COLORS} />
 				</StatCard>

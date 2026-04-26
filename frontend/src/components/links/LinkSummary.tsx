@@ -1,8 +1,4 @@
-type Props = {
-	totalLinks: number;
-	totalVisits: number;
-	topSlug: string;
-};
+type Props = { totalLinks: number; totalVisits: number; topSlug: string };
 
 export default function StatsSummary({ totalLinks, totalVisits, topSlug }: Props) {
 	const items = [
@@ -12,31 +8,14 @@ export default function StatsSummary({ totalLinks, totalVisits, topSlug }: Props
 	];
 
 	return (
-		<div
-			style={{
-				display: 'flex',
-				gap: 12,
-				flexWrap: 'wrap',
-				marginBottom: 28,
-			}}
-		>
+		<div className="flex gap-3 flex-wrap mb-7">
 			{items.map((s) => (
 				<div
 					key={s.label}
-					style={{
-						padding: '8px 16px',
-						borderRadius: 10,
-						background: 'var(--surface)',
-						border: '0.5px solid var(--border)',
-						fontSize: 13,
-						color: 'var(--muted)',
-						display: 'flex',
-						gap: 8,
-						alignItems: 'center',
-					}}
+					className="px-4 py-2 rounded-lg bg-surface border border-border text-sm text-muted flex gap-2 items-center"
 				>
 					<span>{s.label}</span>
-					<span style={{ color: 'var(--fg)', fontWeight: 500 }}>{s.value}</span>
+					<span className="text-fg font-medium">{s.value}</span>
 				</div>
 			))}
 		</div>

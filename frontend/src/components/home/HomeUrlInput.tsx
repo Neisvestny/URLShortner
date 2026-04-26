@@ -10,7 +10,7 @@ type Props = {
 
 export default function UrlInput({ value, error, loading, onChange, onSubmit }: Props) {
 	return (
-		<div style={{ display: 'flex', gap: 8, marginBottom: error ? 8 : 0 }}>
+		<div className={`flex gap-2 ${error ? 'mb-0' : 'mb-0'}`}>
 			<input
 				type="url"
 				value={value}
@@ -19,54 +19,14 @@ export default function UrlInput({ value, error, loading, onChange, onSubmit }: 
 				placeholder="https://очень-длинная-ссылка.com/которую/нужно/сократить"
 				spellCheck={false}
 				autoComplete="off"
-				style={{
-					flex: 1,
-					background: 'var(--surface)',
-					border: `0.5px solid ${error ? 'var(--color-border-danger, #ff4444)' : 'var(--border)'}`,
-					borderRadius: 10,
-					padding: '11px 14px',
-					fontSize: 14,
-					color: 'var(--fg)',
-					outline: 'none',
-					fontFamily: 'inherit',
-					transition: 'border-color 0.15s',
-					minWidth: 0,
-				}}
-				onFocus={(e) => {
-					e.currentTarget.style.borderColor = error
-						? 'var(--color-border-danger, #ff4444)'
-						: 'var(--border-hover)';
-				}}
-				onBlur={(e) => {
-					e.currentTarget.style.borderColor = error
-						? 'var(--color-border-danger, #ff4444)'
-						: 'var(--border)';
-				}}
+				className={`flex-1 min-w-0 bg-surface border rounded-lg px-3.5 py-2.5 text-sm text-fg outline-none transition-colors font-sans placeholder:text-muted ${
+					error ? 'border-danger' : 'border-border focus:border-border-hover'
+				}`}
 			/>
 			<button
 				onClick={onSubmit}
 				disabled={loading}
-				style={{
-					background: loading ? 'var(--fg-muted, var(--muted))' : 'var(--fg)',
-					color: 'var(--bg)',
-					border: 'none',
-					borderRadius: 10,
-					padding: '11px 20px',
-					fontSize: 14,
-					fontWeight: 500,
-					cursor: loading ? 'default' : 'pointer',
-					transition: 'all 0.15s',
-					whiteSpace: 'nowrap',
-					minWidth: 110,
-					fontFamily: 'inherit',
-					opacity: loading ? 0.6 : 1,
-				}}
-				onMouseEnter={(e) => {
-					if (!loading) e.currentTarget.style.opacity = '0.88';
-				}}
-				onMouseLeave={(e) => {
-					if (!loading) e.currentTarget.style.opacity = '1';
-				}}
+				className="bg-fg text-bg border-none rounded-lg px-5 py-2.5 text-sm font-medium font-sans cursor-pointer transition-opacity whitespace-nowrap min-w-[110px] disabled:opacity-60 disabled:cursor-default hover:opacity-90"
 			>
 				{loading ? <LoadingDots /> : 'Сократить'}
 			</button>

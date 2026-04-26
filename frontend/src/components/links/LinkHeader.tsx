@@ -20,33 +20,14 @@ export default function StatsHeader({
 	setQuery,
 }: Props) {
 	return (
-		<div style={{ marginBottom: 40 }}>
-			<p
-				style={{
-					color: 'var(--muted)',
-					fontSize: 13,
-					margin: '0 0 8px',
-					letterSpacing: '0.05em',
-					textTransform: 'uppercase',
-				}}
-			>
+		<div className="mb-10">
+			<p className="text-muted text-xs m-0 mb-2 tracking-widest uppercase">
 				{user?.username} · обзор
 			</p>
-			<h1
-				style={{
-					fontSize: 'clamp(28px, 4vw, 40px)',
-					fontWeight: 500,
-					letterSpacing: '-1.5px',
-					margin: '0 0 24px',
-					lineHeight: 1.1,
-					color: 'var(--fg)',
-				}}
-			>
+			<h1 className="text-4xl md:text-5xl font-medium tracking-tight m-0 mb-6 leading-tight text-fg">
 				Ваши ссылки
 			</h1>
-
 			<StatsSummary totalLinks={totalLinks} totalVisits={totalVisits} topSlug={topSlug} />
-
 			<StatsSearch query={query} setQuery={setQuery} />
 		</div>
 	);

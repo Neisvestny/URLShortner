@@ -1,28 +1,12 @@
-import { useState, type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
-type NavLinkProps = {
-	children: ReactNode;
-	onClick?: () => void;
-};
+type Props = { children: ReactNode; onClick?: () => void };
 
-export default function NavLink({ children, onClick }: NavLinkProps) {
-	const [hovered, setHovered] = useState(false);
+export default function NavLink({ children, onClick }: Props) {
 	return (
 		<button
 			onClick={onClick}
-			onMouseEnter={() => setHovered(true)}
-			onMouseLeave={() => setHovered(false)}
-			style={{
-				fontSize: 13,
-				color: hovered ? 'var(--fg)' : 'var(--muted)',
-				padding: '6px 12px',
-				borderRadius: 7,
-				cursor: 'pointer',
-				border: 'none',
-				background: hovered ? 'var(--surface)' : 'transparent',
-				transition: 'all 0.15s',
-				fontFamily: 'inherit',
-			}}
+			className="text-sm text-muted px-3 py-1.5 rounded-md cursor-pointer border-none bg-transparent transition-colors font-sans hover:text-fg hover:bg-surface"
 		>
 			{children}
 		</button>

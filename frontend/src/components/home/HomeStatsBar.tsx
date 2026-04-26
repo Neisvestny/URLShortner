@@ -1,6 +1,6 @@
 import { useGlobalStats } from '../../hooks/useGlobalStats';
 
-function formatNum(n: number): string {
+function formatNum(n: number) {
 	if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`;
 	if (n >= 1_000) return `${(n / 1_000).toFixed(1)}K`;
 	return String(n);
@@ -8,47 +8,18 @@ function formatNum(n: number): string {
 
 export default function StatsBar() {
 	const stats = useGlobalStats();
-
 	const items = [
-		{
-			num: stats ? formatNum(stats.total_links) : '—',
-			desc: 'ссылок создано',
-		},
+		{ num: stats ? formatNum(stats.total_links) : '—', desc: 'ссылок создано' },
 		{ num: stats ? formatNum(stats.total_visits) : '—', desc: 'переходов' },
 		{ num: stats ? `${stats.total_countries}+` : '—', desc: 'стран' },
 	];
 
 	return (
-		<div
-			style={{
-				display: 'flex',
-				gap: 48,
-				marginTop: 64,
-				paddingTop: 48,
-				borderTop: '0.5px solid var(--border)',
-			}}
-		>
+		<div className="flex gap-12 mt-16 pt-12 border-t border-border">
 			{items.map(({ num, desc }) => (
 				<div key={desc}>
-					<div
-						style={{
-							fontSize: 28,
-							fontWeight: 500,
-							letterSpacing: '-1px',
-							color: 'var(--fg)',
-						}}
-					>
-						{num}
-					</div>
-					<div
-						style={{
-							fontSize: 12,
-							color: 'var(--muted)',
-							marginTop: 4,
-						}}
-					>
-						{desc}
-					</div>
+					<div className="text-3xl font-medium tracking-tight text-fg">{num}</div>
+					<div className="text-xs text-muted mt-1">{desc}</div>
 				</div>
 			))}
 		</div>

@@ -3,27 +3,8 @@ import { useState, type ChangeEvent } from 'react';
 import type FormState from '../../types/formState';
 import getPasswordStrength from '../../utils/getPasswordStrength';
 
-const inputStyle: React.CSSProperties = {
-	width: '100%',
-	padding: '10px 14px',
-	background: 'var(--surface)',
-	border: '0.5px solid var(--border)',
-	borderRadius: 8,
-	color: 'var(--fg)',
-	fontSize: 14,
-	outline: 'none',
-	boxSizing: 'border-box',
-	transition: 'border-color 0.15s',
-	fontFamily: 'inherit',
-};
-
-const labelStyle: React.CSSProperties = {
-	display: 'block',
-	fontSize: 13,
-	color: 'var(--muted)',
-	marginBottom: 6,
-	letterSpacing: '0.01em',
-};
+const inputClass =
+	'w-full px-3.5 py-2.5 bg-surface border border-border rounded-btn text-fg text-sm outline-none transition-colors font-sans placeholder:text-muted focus:border-border-hover';
 
 type Props = {
 	form: FormState;
@@ -34,84 +15,49 @@ type Props = {
 export default function AuthForm({ form, isRegister, onChange }: Props) {
 	const [showPassword, setShowPassword] = useState(false);
 	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-	const [focusedField, setFocusedField] = useState<string | null>(null);
 
 	const passwordStrength = getPasswordStrength(form.password);
 
 	return (
-		<div
-			style={{
-				display: 'flex',
-				flexDirection: 'column',
-				gap: 16,
-			}}
-		>
+		<div className="flex flex-col gap-4">
 			{isRegister && (
 				<div>
-					<label style={labelStyle}>Имя пользователя</label>
+					<label className="block text-sm text-muted mb-1.5">Имя пользователя</label>
 					<input
 						type="text"
 						placeholder="username"
 						value={form.username}
 						onChange={onChange('username')}
-						onFocus={() => setFocusedField('username')}
-						onBlur={() => setFocusedField(null)}
-						style={{
-							...inputStyle,
-							borderColor:
-								focusedField === 'username'
-									? 'var(--border-hover)'
-									: 'var(--border)',
-						}}
+						className={inputClass}
 					/>
 				</div>
 			)}
 
 			<div>
-				<label style={labelStyle}>Email</label>
+				<label className="block text-sm text-muted mb-1.5">Email</label>
 				<input
 					type="email"
 					placeholder="you@example.com"
 					value={form.email}
 					onChange={onChange('email')}
-					onFocus={() => setFocusedField('email')}
-					onBlur={() => setFocusedField(null)}
-					style={{
-						...inputStyle,
-						borderColor:
-							focusedField === 'email' ? 'var(--border-hover)' : 'var(--border)',
-					}}
+					className={inputClass}
 				/>
 			</div>
 
 			<div>
-				<label style={labelStyle}>Пароль</label>
-
-				<div style={{ position: 'relative' }}>
+				<label className="block text-sm text-muted mb-1.5">Пароль</label>
+				<div className="relative">
 					<input
 						type={showPassword ? 'text' : 'password'}
 						placeholder="••••••••"
 						value={form.password}
 						onChange={onChange('password')}
-						style={{
-							...inputStyle,
-							paddingRight: 40,
-						}}
+						className={`${inputClass} pr-10`}
 					/>
-
 					<button
 						type="button"
-						onClick={() => setShowPassword((prev) => !prev)}
-						style={{
-							position: 'absolute',
-							right: 10,
-							top: '50%',
-							transform: 'translateY(-50%)',
-							background: 'none',
-							border: 'none',
-							color: 'var(--muted)',
-							cursor: 'pointer',
-						}}
+						onClick={() => setShowPassword((v) => !v)}
+						className="absolute right-2.5 top-1/2 -translate-y-1/2 bg-transparent border-none text-muted cursor-pointer p-0 flex"
 					>
 						{showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
 					</button>
@@ -121,38 +67,19 @@ export default function AuthForm({ form, isRegister, onChange }: Props) {
 			{isRegister && (
 				<>
 					<div>
-						<label style={labelStyle}>Повторите пароль</label>
-
-						<div style={{ position: 'relative' }}>
+						<label className="block text-sm text-muted mb-1.5">Повторите пароль</label>
+						<div className="relative">
 							<input
 								type={showConfirmPassword ? 'text' : 'password'}
 								placeholder="••••••••"
 								value={form.confirmPassword}
 								onChange={onChange('confirmPassword')}
-								onFocus={() => setFocusedField('confirmPassword')}
-								onBlur={() => setFocusedField(null)}
-								style={{
-									...inputStyle,
-									paddingRight: 40,
-									borderColor:
-										focusedField === 'confirmPassword'
-											? 'var(--border-hover)'
-											: 'var(--border)',
-								}}
+								className={`${inputClass} pr-10`}
 							/>
 							<button
 								type="button"
-								onClick={() => setShowConfirmPassword((prev) => !prev)}
-								style={{
-									position: 'absolute',
-									right: 10,
-									top: '50%',
-									transform: 'translateY(-50%)',
-									background: 'none',
-									border: 'none',
-									color: 'var(--muted)',
-									cursor: 'pointer',
-								}}
+								onClick={() => setShowConfirmPassword((v) => !v)}
+								className="absolute right-2.5 top-1/2 -translate-y-1/2 bg-transparent border-none text-muted cursor-pointer p-0 flex"
 							>
 								{showConfirmPassword ? <EyeOff size={16} /> : <Eye size={16} />}
 							</button>
@@ -160,38 +87,22 @@ export default function AuthForm({ form, isRegister, onChange }: Props) {
 					</div>
 
 					{form.password && (
-						<div style={{ marginTop: 6 }}>
-							<div
-								style={{
-									height: 4,
-									borderRadius: 4,
-									background: 'var(--border)',
-									overflow: 'hidden',
-								}}
-							>
+						<div>
+							<div className="h-1 rounded bg-border overflow-hidden">
 								<div
+									className="h-full rounded transition-all duration-200"
 									style={{
-										width: `${
+										width:
 											passwordStrength.label === 'Слабый'
-												? 33
+												? '33%'
 												: passwordStrength.label === 'Средний'
-													? 66
-													: 100
-										}%`,
-										height: '100%',
+													? '66%'
+													: '100%',
 										background: passwordStrength.color,
-										transition: '0.2s',
 									}}
 								/>
 							</div>
-
-							<div
-								style={{
-									fontSize: 12,
-									color: passwordStrength.color,
-									marginTop: 4,
-								}}
-							>
+							<div className="text-xs mt-1" style={{ color: passwordStrength.color }}>
 								{passwordStrength.label}
 							</div>
 						</div>

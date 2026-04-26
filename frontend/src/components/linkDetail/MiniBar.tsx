@@ -1,66 +1,23 @@
-export default function MiniBar({
-	label,
-	n,
-	max,
-	color,
-}: {
+type Props = {
 	label: string;
 	n: number;
 	max: number;
 	color: string;
-}) {
+};
+
+export default function MiniBar({ label, n, max, color }: Props) {
 	return (
-		<div
-			style={{
-				display: 'flex',
-				alignItems: 'center',
-				gap: 10,
-				marginBottom: 8,
-			}}
-		>
-			<span
-				style={{
-					fontSize: 12,
-					color: 'var(--muted)',
-					width: 80,
-					flexShrink: 0,
-					overflow: 'hidden',
-					textOverflow: 'ellipsis',
-					whiteSpace: 'nowrap',
-				}}
-			>
+		<div className="flex items-center gap-2.5 mb-2">
+			<span className="text-xs text-muted w-20 shrink-0 overflow-hidden text-ellipsis whitespace-nowrap">
 				{label}
 			</span>
-			<div
-				style={{
-					flex: 1,
-					height: 4,
-					borderRadius: 99,
-					background: 'var(--border)',
-				}}
-			>
+			<div className="flex-1 h-1 rounded-full bg-border">
 				<div
-					style={{
-						height: '100%',
-						width: `${(n / max) * 100}%`,
-						borderRadius: 99,
-						background: color,
-						transition: 'width 0.5s cubic-bezier(.4,0,.2,1)',
-					}}
+					className="h-full rounded-full transition-[width] duration-500"
+					style={{ width: `${(n / max) * 100}%`, background: color }}
 				/>
 			</div>
-			<span
-				style={{
-					fontSize: 12,
-					color: 'var(--muted)',
-					opacity: 0.6,
-					width: 24,
-					textAlign: 'right',
-					flexShrink: 0,
-				}}
-			>
-				{n}
-			</span>
+			<span className="text-xs text-muted opacity-60 w-6 text-right shrink-0">{n}</span>
 		</div>
 	);
 }

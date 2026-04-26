@@ -23,42 +23,24 @@ export default function AuthPage() {
 	return (
 		<MainLayout>
 			<div
-				style={{
-					display: 'flex',
-					justifyContent: 'center',
-					paddingTop: 40,
-				}}
+				className="flex justify-center pt-10"
 				onKeyDown={(e) => e.key === 'Enter' && !isLoading && handleSubmit()}
 			>
-				<div
-					style={{
-						width: '100%',
-						maxWidth: 400,
-					}}
-				>
-					{/* Заголовок */}
+				<div className="w-full max-w-sm">
 					<AuthHeader isRegister={isRegister} />
-
-					{/* Переключатель режима */}
 					<AuthModeSwitch mode={mode} onChange={handleModeSwitch} />
 
-					{/* Поля формы */}
-					<AuthForm form={form} isRegister={isRegister} onChange={handleChange} />
+					<div key={mode} className="animate-[fadeIn_0.2s_ease]">
+						<AuthForm form={form} isRegister={isRegister} onChange={handleChange} />
+						{error && <AuthError message={error} />}
+						<AuthSubmitButton
+							isLoading={isLoading}
+							isRegister={isRegister}
+							onClick={handleSubmit}
+						/>
+					</div>
 
-					{/* Ошибка */}
-					{error && <AuthError message={error} />}
-
-					{/* Кнопка */}
-					<AuthSubmitButton
-						isLoading={isLoading}
-						isRegister={isRegister}
-						onClick={handleSubmit}
-					/>
-
-					{/* Разделитель */}
 					<AuthSeparator />
-
-					{/* Подсказка переключения */}
 					<AuthFooter isRegister={isRegister} onToggle={handleModeSwitch} />
 				</div>
 			</div>

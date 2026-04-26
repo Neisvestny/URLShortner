@@ -4,13 +4,11 @@ import { selectTheme } from '../features/theme/themeSelectors';
 import { useAppSelector } from '../hooks/storeHooks';
 import Navbar from './Navbar';
 
-type Props = {
-	children: React.ReactNode;
-};
+type Props = { children: React.ReactNode };
+
 export default function MainLayout({ children }: Props) {
 	const isAuthenticated = useAppSelector(selectIsAuthenticated);
 	const user = useAppSelector(selectUser);
-
 	const theme = useAppSelector(selectTheme);
 
 	useEffect(() => {
@@ -18,34 +16,10 @@ export default function MainLayout({ children }: Props) {
 	}, [theme]);
 
 	return (
-		<div
-			style={{
-				minHeight: '100vh',
-				display: 'flex',
-				flexDirection: 'column',
-				background: 'var(--bg)',
-				color: 'var(--fg)',
-				fontFamily: "'Geist', 'Inter', -apple-system, sans-serif",
-			}}
-		>
+		<div data-theme={theme} className="min-h-screen flex flex-col bg-bg text-fg font-sans">
 			<Navbar isAuthenticated={isAuthenticated} user={user} />
-
-			<main
-				style={{
-					flex: 1,
-					display: 'flex',
-					justifyContent: 'center',
-					padding: '80px 24px 60px',
-				}}
-			>
-				<div
-					style={{
-						width: '100%',
-						maxWidth: 1200,
-					}}
-				>
-					{children}
-				</div>
+			<main className="flex-1 flex justify-center px-6 py-20">
+				<div className="w-full max-w-screen-xl">{children}</div>
 			</main>
 		</div>
 	);

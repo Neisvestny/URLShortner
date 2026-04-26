@@ -15,22 +15,16 @@ export default function RedirectHandler() {
 
 	useEffect(() => {
 		if (!code || !isValid || isStats) return;
-
 		const handleRedirect = async () => {
+			const API_URL = import.meta.env.VITE_API_URL.replace(/\/$/, '');
 			try {
 				const exists = await linksApi.checkLinkExists(code);
-
-				if (!exists) {
-					setNotFound(true);
-				} else {
-					window.location.replace(`${import.meta.env.VITE_API_URL}/r/${code}`);
-				}
+				if (!exists) setNotFound(true);
+				else window.location.replace(`${API_URL}/r/${code}`);
 			} catch {
-				// если API умер — просто редиректим (fallback)
-				window.location.replace(`${import.meta.env.VITE_API_URL}/r/${code}`);
+				window.location.replace(`${API_URL}/r/${code}`);
 			}
 		};
-
 		handleRedirect();
 	}, [code, isValid, isStats]);
 
@@ -39,18 +33,7 @@ export default function RedirectHandler() {
 	if (isStats) return <LinkDetailPage code={cleanCode} />;
 
 	return (
-		<div
-			style={{
-				minHeight: '100vh',
-				display: 'flex',
-				alignItems: 'center',
-				justifyContent: 'center',
-				background: 'var(--bg)',
-				color: 'var(--muted)',
-				fontSize: 14,
-				fontFamily: "'Geist', sans-serif",
-			}}
-		>
+		<div className="min-h-screen flex items-center justify-center bg-bg text-muted text-sm font-sans">
 			Перенаправление...
 		</div>
 	);

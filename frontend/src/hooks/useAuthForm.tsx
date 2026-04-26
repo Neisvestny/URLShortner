@@ -7,7 +7,7 @@ import type { AuthMode } from '../types/formState';
 import { useAuthFormState } from './useAuthFormState';
 import { useAuthSubmit } from './useAuthSubmit';
 
-interface UseAuthFormReturn {
+type UseAuthFormReturn = {
 	mode: AuthMode;
 	form: FormState;
 	isLoading: boolean;
@@ -16,7 +16,7 @@ interface UseAuthFormReturn {
 	handleChange: (field: keyof FormState) => (e: React.ChangeEvent<HTMLInputElement>) => void;
 	handleModeSwitch: (newMode: AuthMode) => void;
 	handleSubmit: () => Promise<void>;
-}
+};
 
 export const useAuthForm = (): UseAuthFormReturn => {
 	const isAuth = useAppSelector(selectIsAuthenticated);

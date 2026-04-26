@@ -5,43 +5,15 @@ import MainLayout from '../layouts/MainLayout';
 export default function HomePage() {
 	return (
 		<MainLayout>
-			<div
-				style={{
-					display: 'flex',
-					flexDirection: 'column',
-					alignItems: 'center',
-					justifyContent: 'center',
-					minHeight: '100%',
-					textAlign: 'center',
-					width: '100%',
-				}}
-			>
-				<h1
-					style={{
-						fontSize: 'clamp(36px, 6vw, 64px)',
-						fontWeight: 500,
-						letterSpacing: '-2px',
-						lineHeight: 1.05,
-						margin: '0 0 16px',
-					}}
-				>
+			<div className="flex flex-col items-center justify-center min-h-full text-center w-full">
+				<h1 className="text-5xl md:text-6xl font-medium tracking-tighter leading-tight m-0 mb-4">
 					Короткие ссылки.
 					<br />
-					<span style={{ color: '#888' }}>Умная аналитика.</span>
+					<span className="text-muted">Умная аналитика.</span>
 				</h1>
-
-				<p
-					style={{
-						fontSize: 16,
-						color: '#888',
-						lineHeight: 1.6,
-						margin: '0 0 48px',
-						maxWidth: 600,
-					}}
-				>
+				<p className="text-base text-muted leading-relaxed m-0 mb-12 max-w-xl">
 					Сокращайте ссылки и отслеживайте каждый переход — браузер, ОС, регион и время.
 				</p>
-
 				<ShortenForm />
 				<StatsBar />
 			</div>

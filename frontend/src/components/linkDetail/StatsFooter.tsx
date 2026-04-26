@@ -1,19 +1,11 @@
-interface Props {
+type Props = {
 	filteredLength: number;
 	dataLength: number;
-}
+};
 
 export default function StatsFooter({ filteredLength, dataLength }: Props) {
 	return (
-		<p
-			style={{
-				marginTop: 12,
-				fontSize: 12,
-				color: 'var(--muted)',
-				textAlign: 'center',
-				opacity: 0.6,
-			}}
-		>
+		<p className="mt-3 text-xs text-muted text-center opacity-60">
 			{filteredLength} из {dataLength} записей
 		</p>
 	);

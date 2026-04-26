@@ -1,21 +1,8 @@
-type Props = {
-	message: string;
-};
+type Props = { message: string };
 
 export default function AuthError({ message }: Props) {
 	return (
-		<p
-			style={{
-				marginTop: 14,
-				marginBottom: 0,
-				fontSize: 13,
-				color: 'var(--color-text-danger)',
-				padding: '10px 14px',
-				background: 'var(--color-background-danger)',
-				border: '0.5px solid var(--color-border-danger)',
-				borderRadius: 8,
-			}}
-		>
+		<p className="mt-3.5 mb-0 text-sm text-danger px-3.5 py-2.5 bg-danger-bg border border-danger-border rounded-btn">
 			{message}
 		</p>
 	);

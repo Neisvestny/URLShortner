@@ -17,22 +17,17 @@ export default function StatsPage() {
 	const [query, setQuery] = useState('');
 	const { links, isLoading, error } = useLinks();
 
-	const sorted = useMemo(() => {
-		return [...links].sort((a, b) => b.visits - a.visits);
-	}, [links]);
+	const sorted = useMemo(() => [...links].sort((a, b) => b.visits - a.visits), [links]);
 
 	const filtered = useMemo(() => {
 		const q = normalize(query);
 		if (!q) return sorted;
-
-		return sorted.filter((l) => {
-			return normalize(l.slug).includes(q) || normalize(l.original_url).includes(q);
-		});
+		return sorted.filter(
+			(l) => normalize(l.slug).includes(q) || normalize(l.original_url).includes(q),
+		);
 	}, [query, sorted]);
 
-	if (!isAuthenticated) {
-		return <Navigate to="/" replace />;
-	}
+	if (!isAuthenticated) return <Navigate to="/" replace />;
 
 	const maxVisits = Math.max(...sorted.map((l) => l.visits));
 	const totalVisits = sorted.reduce((s, l) => s + l.visits, 0);
@@ -40,7 +35,7 @@ export default function StatsPage() {
 	if (isLoading) {
 		return (
 			<MainLayout>
-				<div style={{ color: 'var(--muted)', padding: '40px 0' }}>Загрузка...</div>
+				<div className="text-muted py-10">Загрузка...</div>
 			</MainLayout>
 		);
 	}
@@ -48,21 +43,13 @@ export default function StatsPage() {
 	if (error) {
 		return (
 			<MainLayout>
-				<div
-					style={{
-						color: 'var(--color-text-danger)',
-						padding: '40px 0',
-					}}
-				>
-					{error}
-				</div>
+				<div className="text-danger py-10">{error}</div>
 			</MainLayout>
 		);
 	}
 
 	return (
 		<MainLayout>
-			{/* Header */}
 			<StatsHeader
 				user={user}
 				totalLinks={links.length}
@@ -72,14 +59,7 @@ export default function StatsPage() {
 				setQuery={setQuery}
 			/>
 
-			{/* Link cards */}
-			<div
-				style={{
-					display: 'flex',
-					flexDirection: 'column',
-					gap: 12,
-				}}
-			>
+			<div className="flex flex-col gap-3">
 				<StatsList links={filtered} query={query} maxVisits={maxVisits} />
 			</div>
 		</MainLayout>

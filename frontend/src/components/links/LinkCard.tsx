@@ -6,12 +6,7 @@ import highlight from '../../utils/highlight';
 import { truncate } from '../../utils/truncate';
 import VisitBar from './LinkVisitBar';
 
-type Props = {
-	link: Link;
-	index: number;
-	query: string;
-	maxVisits: number;
-};
+type Props = { link: Link; index: number; query: string; maxVisits: number };
 
 export default function StatsCard({ link, index, query, maxVisits }: Props) {
 	const navigate = useNavigate();
@@ -20,128 +15,45 @@ export default function StatsCard({ link, index, query, maxVisits }: Props) {
 	return (
 		<div
 			onClick={() => navigate(`/${link.slug}+`)}
-			style={{
-				padding: '20px 24px',
-				borderRadius: 14,
-				background: 'var(--surface)',
-				border: '0.5px solid var(--border)',
-				transition: 'border-color 0.15s, background 0.15s',
-				cursor: 'pointer',
-			}}
-			onMouseEnter={(e) => {
-				(e.currentTarget as HTMLDivElement).style.background = 'var(--surface-hover)';
-				(e.currentTarget as HTMLDivElement).style.borderColor = 'var(--border-hover)';
-			}}
-			onMouseLeave={(e) => {
-				(e.currentTarget as HTMLDivElement).style.background = 'var(--surface)';
-				(e.currentTarget as HTMLDivElement).style.borderColor = 'var(--border)';
-			}}
+			className="px-6 py-5 rounded-card bg-surface border border-border transition-colors cursor-pointer hover:bg-surface-hover hover:border-border-hover"
 		>
-			<div
-				style={{
-					display: 'flex',
-					alignItems: 'flex-start',
-					justifyContent: 'space-between',
-					gap: 16,
-				}}
-			>
-				{/* Left */}
-				<div style={{ minWidth: 0, flex: 1 }}>
-					<div
-						style={{
-							display: 'flex',
-							alignItems: 'center',
-							gap: 10,
-							marginBottom: 6,
-						}}
-					>
+			<div className="flex items-start justify-between gap-4">
+				<div className="min-w-0 flex-1">
+					<div className="flex items-center gap-2.5 mb-1.5">
 						<span
-							style={{
-								fontSize: 11,
-								fontWeight: 500,
-								color: index === 0 ? '#b48cff' : 'var(--muted)',
-								background: index === 0 ? 'rgba(180,140,255,0.1)' : 'var(--bg)',
-								border: `0.5px solid ${index === 0 ? 'rgba(180,140,255,0.25)' : 'var(--border)'}`,
-								borderRadius: 6,
-								padding: '2px 7px',
-								letterSpacing: '0.03em',
-							}}
+							className={`text-xs font-medium px-1.5 py-0.5 rounded-md border ${
+								index === 0
+									? 'text-accent border-accent/25 bg-accent/10'
+									: 'text-muted border-border bg-bg'
+							}`}
 						>
 							#{index + 1}
 						</span>
-						<span
-							style={{
-								fontSize: 15,
-								fontWeight: 500,
-								color: 'var(--fg)',
-								letterSpacing: '-0.3px',
-							}}
-						>
+						<span className="text-base font-medium text-fg tracking-tight">
 							/{highlight(link.slug, query)}
 						</span>
 					</div>
-
 					<p
-						style={{
-							margin: 0,
-							fontSize: 13,
-							color: 'var(--muted)',
-							overflow: 'hidden',
-							textOverflow: 'ellipsis',
-							whiteSpace: 'nowrap',
-						}}
+						className="m-0 text-sm text-muted overflow-hidden text-ellipsis whitespace-nowrap"
 						title={link.original_url}
 					>
 						{highlight(truncate(link.original_url, 60), query)}
 					</p>
-
 					<VisitBar visits={link.visits} max={maxVisits} />
 				</div>
 
-				{/* Right */}
-				<div
-					style={{
-						display: 'flex',
-						gap: 24,
-						alignItems: 'center',
-						flexShrink: 0,
-					}}
-				>
-					<div style={{ textAlign: 'right' }}>
-						<p
-							style={{
-								margin: 0,
-								fontSize: 22,
-								fontWeight: 500,
-								letterSpacing: '-0.8px',
-								lineHeight: 1,
-								color: 'var(--fg)',
-							}}
-						>
+				<div className="flex gap-6 items-center shrink-0">
+					<div className="text-right">
+						<p className="m-0 text-2xl font-medium tracking-tight leading-none text-fg">
 							{link.visits.toLocaleString('ru')}
 						</p>
-						<p
-							style={{
-								margin: '4px 0 0',
-								fontSize: 11,
-								color: 'var(--muted)',
-								textTransform: 'uppercase',
-								letterSpacing: '0.05em',
-							}}
-						>
+						<p className="m-0 mt-1 text-xs text-muted uppercase tracking-wider">
 							переходов
 						</p>
 					</div>
 
-					<div style={{ textAlign: 'right' }}>
-						<p
-							style={{
-								margin: 0,
-								fontSize: 13,
-								color: 'var(--muted)',
-								lineHeight: 1,
-							}}
-						>
+					<div className="text-right">
+						<p className="m-0 text-sm text-muted leading-none">
 							{link.last_visit
 								? new Date(link.last_visit).toLocaleDateString('ru', {
 										day: 'numeric',
@@ -150,16 +62,7 @@ export default function StatsCard({ link, index, query, maxVisits }: Props) {
 									})
 								: '—'}
 						</p>
-						<p
-							style={{
-								margin: '4px 0 0',
-								fontSize: 11,
-								color: 'var(--muted)',
-								textTransform: 'uppercase',
-								letterSpacing: '0.05em',
-								opacity: 0.6,
-							}}
-						>
+						<p className="m-0 mt-1 text-xs text-muted uppercase tracking-wider opacity-60">
 							последний
 						</p>
 					</div>
@@ -167,37 +70,12 @@ export default function StatsCard({ link, index, query, maxVisits }: Props) {
 					<button
 						onClick={(e) => {
 							e.stopPropagation();
-
 							navigator.clipboard.writeText(`${window.location.origin}/${link.slug}`);
 							setCopied(true);
-
 							setTimeout(() => setCopied(false), 1500);
 						}}
 						title="Скопировать ссылку"
-						style={{
-							width: 34,
-							height: 34,
-							borderRadius: 8,
-							border: '0.5px solid var(--border)',
-							background: 'var(--bg)',
-							color: 'var(--muted)',
-							cursor: 'pointer',
-							display: 'flex',
-							alignItems: 'center',
-							justifyContent: 'center',
-							flexShrink: 0,
-							transition: 'color 0.15s, border-color 0.15s',
-						}}
-						onMouseEnter={(e) => {
-							(e.currentTarget as HTMLButtonElement).style.color = 'var(--fg)';
-							(e.currentTarget as HTMLButtonElement).style.borderColor =
-								'var(--border-hover)';
-						}}
-						onMouseLeave={(e) => {
-							(e.currentTarget as HTMLButtonElement).style.color = 'var(--muted)';
-							(e.currentTarget as HTMLButtonElement).style.borderColor =
-								'var(--border)';
-						}}
+						className="size-[34px] rounded-lg border border-border bg-bg text-muted cursor-pointer flex items-center justify-center shrink-0 transition-colors hover:text-fg hover:border-border-hover"
 					>
 						{copied ? <Check size={14} /> : <Copy size={14} />}
 					</button>

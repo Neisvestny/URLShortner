@@ -1,30 +1,11 @@
-type Props = {
-	isLoading: boolean;
-	isRegister: boolean;
-	onClick: () => void;
-};
+type Props = { isLoading: boolean; isRegister: boolean; onClick: () => void };
 
 export default function AuthSubmitButton({ isLoading, isRegister, onClick }: Props) {
 	return (
 		<button
 			onClick={onClick}
 			disabled={isLoading}
-			style={{
-				width: '100%',
-				marginTop: 24,
-				padding: '11px 0',
-				background: 'var(--fg)',
-				color: 'var(--bg)',
-				border: 'none',
-				borderRadius: 8,
-				fontSize: 14,
-				fontWeight: 500,
-				fontFamily: 'inherit',
-				cursor: isLoading ? 'not-allowed' : 'pointer',
-				opacity: isLoading ? 0.6 : 1,
-				transition: 'opacity 0.15s',
-				letterSpacing: '-0.01em',
-			}}
+			className="w-full mt-6 py-3 bg-fg text-bg bg-surface border-none rounded-btn text-sm font-medium font-sans transition-opacity cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
 		>
 			{isLoading ? 'Загрузка...' : isRegister ? 'Создать аккаунт' : 'Войти'}
 		</button>
